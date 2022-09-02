@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  errorMessage: string = "";
   loginForm = new UntypedFormGroup({
     email: new UntypedFormControl(''),
     password: new UntypedFormControl('')
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       () => {
         this.authService.loggedIn=true;
       },
-      (err) => console.log(err),
+      (err) => {console.log(err); this.errorMessage="Invalid Email and Password"},
       () => this.router.navigate(['home'])
     );
   }

@@ -13,6 +13,7 @@ import { DisplayProductsComponent } from './components/display-products/display-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WishCartComponent } from './components/wish-cart/wish-cart.component';
+import { CaroselComponent } from './components/carosel/carosel.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { WishCartComponent } from './components/wish-cart/wish-cart.component';
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
-    WishCartComponent
+    WishCartComponent,
+    CaroselComponent
   ],
   imports: [
     BrowserModule,
