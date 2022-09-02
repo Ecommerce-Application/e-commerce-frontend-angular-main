@@ -14,13 +14,13 @@ export class LoginComponent implements OnInit {
     email: new UntypedFormControl(''),
     password: new UntypedFormControl('')
   })
-  
+
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
-  
+
   onSubmit(): void {
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
       () => {
