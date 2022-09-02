@@ -1,0 +1,10 @@
+<div class="mb-3">
+    <input type="text" class="form-control" placeholder="search product">
+</div>
+<button class="btn btn-primary" (click)="searchProduct()" [ngModel]="searchParam">Search</button>
+<select class="form-select" [ngModel]="searchType">
+    <option selected value="name">Search By:</option>
+    <option value="tag">Tag</option>
+    <option value="description">Description</option>
+    <option value="image">Image</option>
+  </select>

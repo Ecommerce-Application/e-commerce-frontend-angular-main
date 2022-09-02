@@ -2,10 +2,10 @@
 <div class="container">
     <app-search-bar></app-search-bar>
     <div class="row align-items-start">
-       <div class="col" *ngFor="let product of allProducts">
+       <div class="col" *ngFor="let fProduct of filteredProducts">
             <app-product-card
                 class="cardListItem"
-                [productInfo]="product"
+                [productInfo]="fProduct"
             ></app-product-card> 
         </div> 
     </div>
