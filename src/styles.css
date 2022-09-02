@@ -1,28 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-/* Fonts
-	font-family: ‘Poppins’, sans-serif;  -- headings h1 – h6 -- 
-	font-family: 'Lato', sans-serif;  -- paragraphs -- buttons --
-    colors:
-        black,
-        white,
-        #f58822,
-        #f16d26,
-        #edc615
-    
-    button HTML tag
-    <button mat-button class="button-style"></button>
- */
- .button-style {
+#button-style {
     background-color: #edc615;
     color: black;
     border-radius:2px;
     font-family: 'Lato', sans-serif;
-}
-
-.p-font {
-    font-family: 'Lato', sans-serif;
-}
-
-.h-font {
-    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+    border: none;
+    box-shadow: 1px 1px 1px black;
+    text-align: center;
 }

@@ -11,14 +11,18 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class NavbarComponent implements OnInit{
 
+  wishCount!: number;
   cartCount!: number;
   subscription!: Subscription;
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
-  
+
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
       (cart) => this.cartCount = cart.cartCount
+    );
+    this.subscription = this.productService.getWishCart().subscribe(
+      (wish) => this.wishCount = wish.wishCartCount
     );
   }
 

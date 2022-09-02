@@ -18,16 +18,34 @@ export class ProductCardComponent implements OnInit{
   subscription!: Subscription;
   totalPrice: number = 0;
 
+
+  wishCartCount!: number;
+  wishProducts:{
+    wishProduct: Product,
+    wishQuantity: number
+  } [] = [];
+  wishSubscription!: Subscription;
+  wishTotalPrice!: number;
+
+
   @Input() productInfo!: Product;
 
   constructor(private productService: ProductService) { }
-  
+
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
       (cart) => {
         this.cartCount = cart.cartCount;
         this.products = cart.products;
         this.totalPrice = cart.totalPrice;
+      }
+    );
+
+    this.wishSubscription = this.productService.getWishCart().subscribe(
+      (wishCart) => {
+        this.wishCartCount = wishCart.wishCartCount;
+        this.wishProducts = wishCart.wishProducts;
+        this.wishTotalPrice = wishCart.wishTotalPrice;
       }
     );
   }
@@ -65,8 +83,47 @@ export class ProductCardComponent implements OnInit{
       }
       this.productService.setCart(cart);
     }
-      
+
   }
+
+  // Add product to wishcart
+  addToWishCart(product: Product): void {
+    let inWishCart = false;
+
+    this.products.forEach(
+      (element) => {
+        if(element.product == product){
+          ++element.quantity;
+          let wishCart = {
+            wishCartCount: this.wishCartCount + 1,
+            wishProducts: this.wishProducts,
+            wishTotalPrice: this.wishTotalPrice + product.price
+          };
+          this.productService.setWishCart(wishCart);
+          inWishCart=true;
+          return;
+        };
+      }
+    );
+
+    if(inWishCart == false){
+      let newWishProduct = {
+        wishProduct: product,
+        wishQuantity: 1
+      };
+      this.wishProducts.push(newWishProduct);
+      let wishCart = {
+        wishCartCount: this.wishCartCount + 1,
+        wishProducts: this.wishProducts,
+        wishTotalPrice: this.wishTotalPrice + product.price
+      }
+      this.productService.setWishCart(wishCart);
+    }
+  }
+
+
+
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
