@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+#button-style {
+    background-color: #edc615;
+    color: black;
+    border-radius:2px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bolder;
+    border: none;
+    box-shadow: 1px 1px 1px black;
+    text-align: center;
+}

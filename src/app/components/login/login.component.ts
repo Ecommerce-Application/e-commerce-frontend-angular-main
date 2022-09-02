@@ -9,24 +9,24 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  errorMessage: string = "";
   loginForm = new UntypedFormGroup({
     email: new UntypedFormControl(''),
     password: new UntypedFormControl('')
   })
-  
+
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
-  
+
   onSubmit(): void {
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
       () => {
         this.authService.loggedIn=true;
       },
-      (err) => console.log(err),
+      (err) => {console.log(err); this.errorMessage="Invalid Email and Password"},
       () => this.router.navigate(['home'])
     );
   }
