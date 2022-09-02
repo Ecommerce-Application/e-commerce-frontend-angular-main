@@ -13,10 +13,10 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.productId = this.param.snapshot.params['id'];
-    this.getProduct(this.productId);
+    this.getProduct(parseInt(this.productId));
   }
 
-  getProduct(id: string) {
+  getProduct(id: number) {
     this.productsService.getSingleProduct(id).subscribe({
       next: (response) => {
         console.log(response);
@@ -28,5 +28,6 @@ export class ProductDetailsComponent implements OnInit {
         console.log("Success Got Product")
       },
     })
+    
   }
 }
