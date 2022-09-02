@@ -13,6 +13,16 @@ interface Cart {
   totalPrice: number;
 }
 
+interface WishCart {
+  wishCartCount: number;
+  wishProducts: {
+    wishProduct: Product,
+    wishQuantity: number
+  }[];
+  wishTotalPrice: number;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +46,24 @@ export class ProductService {
     return this._cart.next(latestValue);
   }
 
+
+  private _wishcart = new BehaviorSubject<WishCart>({
+    wishCartCount: 0,
+    wishProducts: [],
+    wishTotalPrice: 0.00
+  });
+  private _wishcart$ = this._wishcart.asObservable();
+
+  getWishCart(): Observable<WishCart> {
+    return this._wishcart$;
+  }
+
+  setWishCart(latestValue: WishCart) {
+    return this._wishcart.next(latestValue);
+  }
+
+
+
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
@@ -51,4 +79,44 @@ export class ProductService {
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
+<<<<<<< HEAD
+=======
+ public removeProduct(product: Product): void {
+    this.getCart().subscribe(
+      (cart) => {
+        cart.products.forEach(
+          (element, index) => {
+            if (element.product.id === product.id) {
+              cart.products.splice(index, 1);
+            }
+          }
+        );
+        cart.cartCount -= 1;
+        cart.totalPrice -= product.price;
+        this.setCart(cart);
+      }
+    );
+  }
+
+
+
+
+  public removeWishProduct(product: Product): void {
+    this.getWishCart().subscribe(
+      (wishCart) => {
+        wishCart.wishProducts.forEach(
+          (element, index) => {
+            if (element.wishProduct.id === product.id) {
+              wishCart.wishProducts.splice(index, 1);
+            }
+          }
+        );
+        wishCart.wishCartCount -= 1;
+        wishCart.wishTotalPrice -= product.price;
+        this.setWishCart(wishCart);
+      }
+    );
+        }
+
+>>>>>>> main
 }

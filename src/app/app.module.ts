@@ -12,7 +12,12 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { DisplayProductsComponent } from './components/display-products/display-products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+<<<<<<< HEAD
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+=======
+import { WishCartComponent } from './components/wish-cart/wish-cart.component';
+import { CaroselComponent } from './components/carosel/carosel.component';
+>>>>>>> main
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
+<<<<<<< HEAD
     ProductDetailsComponent
+=======
+    WishCartComponent,
+    CaroselComponent
+>>>>>>> main
   ],
   imports: [
     BrowserModule,
@@ -33,7 +43,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ProductCardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
