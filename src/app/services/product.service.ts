@@ -42,7 +42,7 @@ export class ProductService {
     return this.http.get<Product[]>(environment.baseUrl+this.productUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
-  public getSingleProduct(id: number): Observable<Product> {
+  public getSingleProduct(id: string): Observable<Product> {
     return this.http.get<Product>(environment.baseUrl+id);
   }
 
@@ -50,4 +50,5 @@ export class ProductService {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
+
 }
