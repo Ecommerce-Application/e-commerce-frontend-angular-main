@@ -42,7 +42,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "1000kb",
                   "maximumError": "1mb"
                 },
                 {
@@ -57,6 +57,13 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+	      "optimization": {
+		  "scripts": true,
+		  "styles": {
+		  "minify": true,
+		  "inlineCritical": false
+		  }
+	    },
               "outputHashing": "all"
             },
             "development": {
