@@ -12,14 +12,15 @@ phases:
   install:
     runtime-versions:
         # We need node to install all the dependencies and build the distributable artifact
-        nodejs: 14.5
+        nodejs: 12
     commands:
+        - n 16
         - echo Installing source NPM dependencies...
         - npm install
-        - npm install -g @angular/cli
+        - npm install -g @angular/cli npm@latest
   build:
     commands:
-        -echo Build started
+        - echo Build started
         # ng build is the command you use when you're ready to build your app... 
         # ...and deploy it. The CLI will analyze the application and build the... 
         # ...files, all while optimizing the application as best as it can.
