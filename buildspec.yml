@@ -14,6 +14,7 @@ phases:
         # We need node to install all the dependencies and build the distributable artifact
         nodejs: 14.5
     commands:
+        - n 16
         - echo Installing source NPM dependencies...
         - npm install
         - npm install -g @angular/cli npm@latest
