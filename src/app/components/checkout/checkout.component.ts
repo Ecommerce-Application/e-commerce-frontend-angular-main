@@ -18,6 +18,7 @@ export class CheckoutComponent implements OnInit {
   totalPrice!: number;
   cartProducts: Product[] = [];
   finalProducts: {id: number, quantity: number}[] = [];
+  loadUserInfo: boolean = false;
 
   checkoutForm = new UntypedFormGroup({
     fname: new UntypedFormControl('', Validators.required),
@@ -75,4 +76,5 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  
 }
