@@ -79,14 +79,14 @@ export class ProductService {
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
-<<<<<<< HEAD
+
   public searchProduct(param:string,searchBy:string){
     if(searchBy === "name"){
 
     }
 
   }
-=======
+
  public removeProduct(product: Product): void {
     this.getCart().subscribe(
       (cart) => {
@@ -124,5 +124,5 @@ export class ProductService {
     );
         }
 
->>>>>>> 386c18e41936b538a10b85e933b86d21ea4aeb7a
+
 }
