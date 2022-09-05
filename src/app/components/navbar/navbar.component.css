@@ -3,11 +3,21 @@
 }
 
 .list-counter {
-    background-color: #f58822;
-    color: white;
+    background-color: white;
+    color: #f58822;
     margin-top: 7px;
 }
 
 .shop-title{
-    font-family: 'Lato', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+#nav-button-style {
+    background-color: white;
+    border-radius:2px;
+    font-family: 'Poppins';
+    border: none;
+    box-shadow: 1px 1px 1px black;
+    text-align: center;
 }

@@ -3,9 +3,16 @@
     background-color: #edc615;
     color: black;
     border-radius:2px;
-    font-family: 'Lato', sans-serif;
-    font-weight: bolder;
+    font-family: 'Lato';
     border: none;
     box-shadow: 1px 1px 1px black;
     text-align: center;
+}
+
+.font-lato{
+    font-family: 'Lato', sans-serif;
+}
+
+.font-poppins{
+    font-family: 'Poppins', sans-serif;
 }
