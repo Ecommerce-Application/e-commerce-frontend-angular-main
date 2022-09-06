@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: "home", component: DisplayProductsComponent },
   { path: "cart", component: CartComponent },
   { path: "checkout", component: CheckoutComponent },
-  { path: "wishlist", component: WishCartComponent },
-  { path: "search/:param/:type", component: SearchPageComponent }
+  { path: "product/:id", component: ProductDetailsComponent},
+  { path: "wishlist", component: WishCartComponent }
 ];
 
 @NgModule({
