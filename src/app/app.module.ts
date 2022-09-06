@@ -28,7 +28,6 @@ import { CaroselComponent } from './components/carosel/carosel.component';
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
-
     SearchBarComponent,
     SearchPageComponent,
     WishCartComponent,

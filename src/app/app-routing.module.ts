@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: "home", component: DisplayProductsComponent },
   { path: "cart", component: CartComponent },
   { path: "checkout", component: CheckoutComponent },
-  // { path: "product/:id", component: ProductDetailsComponent},
+  { path: "search", component: SearchPageComponent},
   { path: "wishlist", component: WishCartComponent }
 ];
 
