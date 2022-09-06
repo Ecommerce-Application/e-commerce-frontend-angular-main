@@ -33,7 +33,7 @@ import { CaroselComponent } from './components/carosel/carosel.component';
     SearchPageComponent,
     WishCartComponent,
     CaroselComponent
->>>>>>> main
+
   ],
   imports: [
     BrowserModule,
