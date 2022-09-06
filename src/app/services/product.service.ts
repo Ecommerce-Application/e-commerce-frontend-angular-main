@@ -46,7 +46,6 @@ export class ProductService {
     return this._cart.next(latestValue);
   }
 
-
   private _wishcart = new BehaviorSubject<WishCart>({
     wishCartCount: 0,
     wishProducts: [],
@@ -61,8 +60,6 @@ export class ProductService {
   setWishCart(latestValue: WishCart) {
     return this._wishcart.next(latestValue);
   }
-
-
 
   constructor(private http: HttpClient) { }
 
@@ -79,8 +76,6 @@ export class ProductService {
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
-<<<<<<< HEAD
-=======
  public removeProduct(product: Product): void {
     this.getCart().subscribe(
       (cart) => {
@@ -97,9 +92,6 @@ export class ProductService {
       }
     );
   }
-
-
-
 
   public removeWishProduct(product: Product): void {
     this.getWishCart().subscribe(
@@ -118,5 +110,4 @@ export class ProductService {
     );
         }
 
->>>>>>> main
 }
