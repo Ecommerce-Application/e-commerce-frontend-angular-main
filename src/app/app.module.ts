@@ -12,12 +12,9 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { DisplayProductsComponent } from './components/display-products/display-products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-<<<<<<< HEAD
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
-=======
 import { WishCartComponent } from './components/wish-cart/wish-cart.component';
 import { CaroselComponent } from './components/carosel/carosel.component';
->>>>>>> main
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +26,9 @@ import { CaroselComponent } from './components/carosel/carosel.component';
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
-<<<<<<< HEAD
-    ProductDetailsComponent
-=======
+    ProductDetailsComponent,
     WishCartComponent,
     CaroselComponent
->>>>>>> main
   ],
   imports: [
     BrowserModule,
