@@ -90,7 +90,7 @@ export class WishCartComponent implements OnInit {
   removeWishProduct(product: Product): void {
     this.wishProducts.forEach(
       (element, index) => {
-        if (element.wishProduct.id === product.id) {
+        if (element.wishProduct.prodId === product.prodId) {
           this.wishProducts.splice(index, 1);
         }
       }
@@ -105,7 +105,7 @@ export class WishCartComponent implements OnInit {
     this.productService.setWishCart(wishCart);
 
 
-    this.wishServ.wishDelete(product.id).subscribe(book=>{
+    this.wishServ.wishDelete(product.prodId).subscribe(book=>{
       // this.getAllWishs();
     })
   }
