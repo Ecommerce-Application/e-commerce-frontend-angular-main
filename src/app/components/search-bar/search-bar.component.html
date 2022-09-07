@@ -10,7 +10,7 @@
   </select> -->
 
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="search product"  [(ngModel)]="searchParam">
+    <input type="text" class="form-control" placeholder="search product" name="search" [(ngModel)]="searchParam">
     <button class="btn btn-primary" (click)="searchProduct()">Search</button>
 
     <select class="form-select" [(ngModel)]="searchType">
