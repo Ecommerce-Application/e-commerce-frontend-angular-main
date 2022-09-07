@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { WishHttpService } from 'src/app/services/wish-http.service';
 import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
@@ -18,7 +19,7 @@ export class WishCartComponent implements OnInit {
   wishTotalPrice!: number;
   wishCartProducts: Product[] = [];
 
-  constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router) { }
+  constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router, private wishServ: WishHttpService) { }
 
   ngOnInit(): void {
     this.productService.getWishCart().subscribe(
@@ -102,7 +103,14 @@ export class WishCartComponent implements OnInit {
       wishTotalPrice: this.wishTotalPrice
     };
     this.productService.setWishCart(wishCart);
+
+
+    this.wishServ.wishDelete(product.id).subscribe(book=>{
+      // this.getAllWishs();
+    })
   }
+
+  
 
 
   // trying to add from wishcart to cart
