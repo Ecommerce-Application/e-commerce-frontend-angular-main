@@ -14,15 +14,25 @@ export class SearchPageComponent implements OnInit {
   type: string = '';
   filteredProducts: [] = [];
   ngOnInit(): void {
-    this.param = this.route.snapshot.params['param'];
-    this.type = this.route.snapshot.params['type'];
-      this.getFilteredProducts(this.param, this.type);
+    this.route.queryParams
+      .subscribe(params => {
+        this.param = params.value;
+        this.type = params.type;
+
+      }
+      );
+    this.getFilteredProducts(this.param, this.type);
   }
 
   getFilteredProducts(searchParam: string, searchType: string) {
-    console.log(searchParam, searchType);
-    // this.productsService.searchProduct.{
+    this.productsService.searchProduct(searchParam, searchType).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (err) =>{
+        console.log(err);
+      }
+    })
 
-    // }
   }
 }

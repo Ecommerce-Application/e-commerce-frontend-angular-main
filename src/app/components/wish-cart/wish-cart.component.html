@@ -1,9 +1,9 @@
-<!-- <app-navbar></app-navbar>
+ <app-navbar></app-navbar>
 <table class="table table-striped" id="cart-table">
     <thead>
-      <tr>-->
-        <!-- <th scope="col">ID</th> -->
-        <!--<th scope="col">Name</th>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
         <th scope="col">Quantity</th>
         <th scope="col">Description</th>
         <th scope="col">Price</th>
@@ -12,13 +12,13 @@
     </thead>
     <tbody id="cart-table-body">
         <tr *ngFor="let product of wishProducts;">
-            <!-- <td>{{product.product.id}}</td> -->
-            <!--<td>{{product.wishProduct.name}}</td>
+            <td>{{product.wishProduct.id}}</td>
+            <td>{{product.wishProduct.name}}</td>
             <!--Allow user to change the quantity of a product in cart-->
-            <!--<td>
+            <td>
                <input type="number" [(ngModel)]="product.wishQuantity" (change)="WishProductNumber()" min="1" max="3" id="wishProductNumberID">
 
-            <td>{{product.quantity}}</td> 
+            <td>{{product.wishProduct.quantity}}</td> 
             <td>{{product.wishProduct.description}}</td>
             <td>{{product.wishProduct.price * product.wishQuantity}}</td>
              Button to remove product from cart or add it to cart
@@ -31,4 +31,4 @@
 </table>
 <button class="btn btn-danger" [routerLink]="['/home']">Back</button>
 <button class="btn btn-warning" (click)="emptyWishCart()">Empty Wish Cart</button>
-<button class="btn btn-primary" [routerLink]="['/checkout']">Proceed to Checkout (${{wishTotalPrice}})</button> -->
+<button class="btn btn-primary" [routerLink]="['/checkout']">Proceed to Checkout (${{wishTotalPrice}})</button>

@@ -1,10 +1,22 @@
-<div class="mb-3">
-    <input type="text" class="form-control" placeholder="search product">
+<!-- <div class="mb-3">
+    <input type="text" class="form-control" placeholder="search product"  [(ngModel)]="searchParam">
 </div>
-<button class="btn btn-primary" (click)="searchProduct()" [ngModel]="searchParam">Search</button>
-<select class="form-select" [ngModel]="searchType">
+<button class="btn btn-primary" (click)="searchProduct()">Search</button>
+<select class="form-select" [(ngModel)]="searchType">
     <option selected value="name">Search By:</option>
     <option value="tag">Tag</option>
     <option value="description">Description</option>
     <option value="name">name</option>
-  </select>
+  </select> -->
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="search product"  [(ngModel)]="searchParam">
+    <button class="btn btn-primary" (click)="searchProduct()">Search</button>
+
+    <select class="form-select" [(ngModel)]="searchType">
+        <option selected value="name">Search By:</option>
+        <option value="tag">Tag</option>
+        <option value="description">Description</option>
+        <option value="name">name</option>
+      </select>
+</div>
