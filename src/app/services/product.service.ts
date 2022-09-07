@@ -23,8 +23,7 @@ interface WishCart {
 }
 
 
-@Injectable({
-  providedIn: 'root'
+@Injectable({providedIn: 'root'
 })
 export class ProductService {
 

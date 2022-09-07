@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 @Component({
   selector: 'app-wish-cart',
@@ -18,7 +19,7 @@ export class WishCartComponent implements OnInit {
   wishTotalPrice!: number;
   wishCartProducts: Product[] = [];
 
-  constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router) { }
+  constructor(private productService: ProductService, private productComp: ProductDetailsComponent, private router: Router) { }
 
   ngOnInit(): void {
     this.productService.getWishCart().subscribe(
