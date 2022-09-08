@@ -16,13 +16,13 @@ export class RegisterComponent implements OnInit {
     email: new UntypedFormControl(''),
     password: new UntypedFormControl('')
   })
-  
+
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
-  
+
   onSubmit(): void {
     this.authService.register(this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('email')?.value, this.registerForm.get('password')?.value).subscribe(
       () => console.log("New user registered"),
