@@ -1,0 +1,7 @@
+<div class="flex">
+    <img class="image" src="/../../assets/images/rooster.png" alt="rooster profile photo">
+    <input class="none" type="file" (change)="onFileSelected($event)" #fileInput>
+    <button *ngIf="select" class="upload btn btn-primary my-1" id="button-style" type="button" (click)="fileInput.click()">Select Photo</button>
+    <button *ngIf="upload" class="upload btn btn-primary my-1" id="button-style" type="button" (click)="onUpload()">Upload</button>
+    <div>{{errorMessage}}</div>
+</div>

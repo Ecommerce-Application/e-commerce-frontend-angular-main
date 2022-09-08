@@ -1,0 +1,164 @@
+<div class="">
+    <div class="space-around">
+        <div class="column">
+            <h1>Profile</h1>
+            <h3>Name</h3>
+        </div>
+
+        <image-upload class="height"></image-upload>
+    </div>
+
+    <div class="flex">
+        <div class="flex margin border">
+            <div *ngIf="downInfo">
+                <div class="space-between width100">
+                    <h5>Personal Information</h5>
+                    <img class="icon cursor" src="../../../assets/images/down-arrow.png" alt="down arrow" (click)="upDownInfo()">
+                </div>
+            </div>
+            <div *ngIf="upInfo">
+                <div class="space-between width100">
+                    <h5>Personal Information</h5>
+                    <img class="icon cursor" src="../../../assets/images/up-arrow.png" alt="down arrow" (click)="upDownInfo()">
+                </div>
+
+                <h6 *ngIf="noUserData">No Profile Information Saved</h6>
+
+               <div *ngIf="editUserMode" class="width90 marg">
+                    <div class="column">
+                        <input class="form-control" type="text" id="firstName" placeholder="First Name" minlength="2" required>
+                        <p>minimum 2 characters</p>
+                    </div>
+                    <div class="column">
+                        <input class="disabled" value="lastNam" type="text" id="lastName" placeholder="Last Name" minlength="2" required><br>
+                        <p>minimum 2 characters</p>
+                    </div>
+                    <input type="text" id="email" placeholder="Email" required>
+                    <input type="password" id="pswd" placeholder="Password" required>
+                    <input type="password" id="pswd2" placeholder="Confirm Password" required>
+                </div> 
+
+                <div *ngIf="displayUserMode" class="marg">
+                    <div class="space">
+                        <label for="firstName">Fist Name:</label>
+                        <p>{{firstName}}</p>
+                    </div>
+                    <div class="space">
+                        <label for="lastName">Last Name:</label>
+                        <p>{{lastName}}</p>
+                    </div>
+                    <div class="space">
+                        <label for="email">Email:</label>
+                        <p>{{email}}</p>
+                    </div>
+                    <div class="space">
+                        <label for="pswd">Password:</label>
+                        <p>{{pswd}}</p>
+                    </div>
+                </div> 
+
+                <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveUser()">{{editUserMode ? 'Save' : 'Edit'}}</button>
+                
+                <h6>{{errorMessage}}</h6>
+                
+            </div>
+        </div>
+
+        <div class="flex border margin">
+            <div *ngIf="downAdd">
+                <div class="space-between width100">
+                    <h5>Address</h5>
+                    <img class="icon cursor" src="../../../assets/images/down-arrow.png" alt="down arrow" (click)="upDownAdd()">
+                </div>
+            </div>
+            <div *ngIf="upAdd">
+                <div class="space-between width100">
+                    <h5>Address</h5>
+                    <img class="icon cursor" src="../../../assets/images/up-arrow.png" alt="down arrow" (click)="upDownAdd()">
+                </div>
+
+                <h6 *ngIf="noAddData">No Address Saved</h6>
+
+                <div *ngIf="editAddMode" class="width90 marg">
+                    <input type="text" id="street1" placeholder="Street 1" required>
+                    <input type="text" id="street2" placeholder="Street 2">
+                    <div class="space-between">
+                        <input type="text" id="city" placeholder="City" required>
+                        <input type="text" id="state" placeholder="State" required minlength="2" maxlength="2">
+                        <input type="text" id="zip" placeholder="Zip Code" required minlength="5" maxlength="5">
+                    </div>
+                </div>
+
+                <div *ngIf="displayAddMode" class="marg">
+                    <div class="space">
+                        <label for="street1">Street:</label>
+                        <p>{{street1}}</p>
+                    </div>
+                    <div class="space">
+                        <label for="street2">Street2:</label>
+                        <p>{{street2}}</p>
+                    </div>
+                    <div class="space">
+                        <label for="city">City:</label>
+                        <label for="state">State:</label>
+                        <label for="zip">Zip Code:</label>
+                    </div>
+                    <div class="space">
+                        <p>{{city}}</p>
+                        <p>{{state}}</p>
+                        <p>{{zip}}</p>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+
+                <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveAddress()">{{editAddMode ? 'Save' : 'Edit'}}</button>
+            </div>
+        </div>
+
+        <div class="flex border margin">
+            <div *ngIf="downCC">
+                <div class="space-between width100">
+                    <h5>Credit Card Information</h5>
+                    <img class="icon cursor" src="../../../assets/images/down-arrow.png" alt="down arrow" (click)="upDownCC()">
+                </div>
+            </div>
+            <div *ngIf="upCC">
+                <div class="space-between width100">
+                    <h5>Credit Card Information</h5>
+                    <img class="icon cursor" src="../../../assets/images/up-arrow.png" alt="down arrow" (click)="upDownCC()">
+                </div>
+
+                <h6 *ngIf="noCCData">No Credit Card Information Saved</h6>
+
+                <div *ngIf="editCCMode" class="width90 marg">
+                    <div class="space-between width90">
+                        <input type="text" id="ccNum" placeholder="Credit Card Number" required>
+                    </div>
+                    <div class="space-between width90">
+                        <input type="text" id="exp" placeholder="Expiration MMYY" required pattern="[0-9]*" minlength="4" maxlength="4">
+                        <input type="text" id="svg" placeholder="SVG XXX" required required pattern="[0-9]*" minlength="3" maxlength="3">
+                    </div>
+                </div>
+
+                <div *ngIf="displayCCMode" class="marg">
+                    <div class="space">
+                        <label for="ccNum">Credit Card Number:</label>
+                        <p>{{ccNumber}}</p>
+                    </div>
+                    <div class="space">
+                        <label for="exp">Expiration:</label>
+                        <p>{{exp}}</p>
+                    </div>
+                    <div class="space">
+                        <label for="svg">SVG:</label>
+                        <p>{{svg}}</p>
+                    </div>
+                </div>
+
+                <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveCC()">{{editCCMode ? 'Save' : 'Edit'}}</button>
+            </div>
+        </div>
+    </div>
+</div>

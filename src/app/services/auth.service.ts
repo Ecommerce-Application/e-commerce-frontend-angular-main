@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  authUrl: string = `${environment.baseUrl}/api/auth`;
+  authUrl: string = `${environment.baseUrl}/auth`;
   loggedIn: boolean = false;
   // private httpOptions = {
   //   headers: new HttpHeaders({'Content-Type' : 'application/json'}),

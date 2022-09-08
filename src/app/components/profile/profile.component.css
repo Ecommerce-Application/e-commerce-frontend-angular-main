@@ -1,0 +1,95 @@
+.auto {
+    display: flex;
+    flex-direction: column;
+    margin-left: 800px;
+}
+
+.border {
+    border: 5px double black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.center {
+    margin: auto;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.height {
+    margin: auto 0px;
+}
+
+h6 {
+    color: red;
+}
+
+.icon {
+    height: 40px;
+}
+
+input#ccNum {
+    width: 250%;
+}
+
+.left {
+    margin-left: 225px;
+}
+
+.margin {
+    margin: 10px auto;
+    width: 70%;
+}
+
+.marg {
+    margin: 10px;
+}
+
+.space {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+}
+
+.space-around {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto 10px 250px;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upload {
+    width: 100%;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.width90 {
+    width: 90%;
+    margin: auto;
+}

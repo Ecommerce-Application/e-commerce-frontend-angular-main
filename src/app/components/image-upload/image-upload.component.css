@@ -1,0 +1,22 @@
+
+.center {
+    margin: auto;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.image {
+    max-width: 30%;
+}
+
+.none {
+    display: none;
+}
+
+.upload {
+    width: 30%;
+}
