@@ -86,7 +86,7 @@ export class CartComponent implements OnInit {
   removeProduct(product: Product): void {
     this.products.forEach(
       (element, index) => {
-        if (element.product.id === product.id) {
+        if (element.product.prodId === product.prodId) {
           this.products.splice(index, 1);
         }
       }
