@@ -12,8 +12,8 @@ export class DisplayProductsComponent implements OnInit {
 
   allProducts: Product[] = [];
 
-  param: any;
-  type: any;
+  param: string='';
+  type: string='Search By:';
   
 
   constructor(private productService: ProductService) { }
