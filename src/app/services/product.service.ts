@@ -8,7 +8,7 @@ interface Cart {
   cartCount: number;
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[];
   totalPrice: number;
 }
@@ -70,16 +70,16 @@ export class ProductService {
     return this.http.get<Product[]>(environment.baseUrl+this.productUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
-  public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+this.productUrl+"/"+id);
+  public getSingleProduct(prodId: number): Observable<Product> {
+    return this.http.get<Product>(environment.baseUrl+prodId);
   }
 
-  public purchase(products: {id:number, quantity:number}[]): Observable<any> {
+  public purchase(products: {prodId:number, prodQuantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
- public removeProduct(product: Product): void {
+  public removeProduct(product: Product): void {
     this.getCart().subscribe(
       (cart) => {
         cart.products.forEach(
@@ -90,7 +90,7 @@ export class ProductService {
           }
         );
         cart.cartCount -= 1;
-        cart.totalPrice -= product.price;
+        cart.totalPrice -= product.prodPrice;
         this.setCart(cart);
       }
     );
@@ -110,7 +110,7 @@ export class ProductService {
           }
         );
         wishCart.wishCartCount -= 1;
-        wishCart.wishTotalPrice -= product.price;
+        wishCart.wishTotalPrice -= product.prodPrice;
         this.setWishCart(wishCart);
       }
     );
