@@ -15,7 +15,7 @@ export class WishCartComponent implements OnInit {
   wishProducts: {
     wishProduct: Product,
   }[] = [];
-  wishTotalPrice!: number;
+  wishTotalPrice: number = 0;
   wishCartProducts: Product[] = [];
 
   constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router, private wishServ: WishHttpService) { }
@@ -34,7 +34,6 @@ export class WishCartComponent implements OnInit {
             this.wishTotalPrice += element.prodPrice;
           }
         )
-        
       }
     );
   }

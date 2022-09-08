@@ -22,8 +22,8 @@ export class NavbarComponent implements OnInit{
     this.subscription = this.productService.getCart().subscribe(
       (cart) => this.cartCount = cart.cartCount
     );
-    this.subscription = this.wishServ.getwishListByUserId().subscribe(
-      (wish) => this.wishCount = wish.length
+    this.subscription = this.productService.getWishCart().subscribe(
+      (wish) => this.wishCount = wish.wishCartCount
     );
   }
 

@@ -4,13 +4,14 @@ import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { WishHttpService } from 'src/app/services/wish-http.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css']
 })
-export class ProductCardComponent implements OnInit{
+export class ProductCardComponent implements OnInit {
 
   cartCount!: number;
   products: {
@@ -22,12 +23,15 @@ export class ProductCardComponent implements OnInit{
 
 
   wishCartCount!: number;
-  wishProducts:{
+  wishProducts: {
     wishProduct: Product,
     wishQuantity: number
-  } [] = [];
+  }[] = [];
   wishSubscription!: Subscription;
   wishTotalPrice!: number;
+  newWishList: Product[] = [];
+  prodIdList: number[] = [];
+  addId: number = 0;
 
   errorMessage: string = "";
 
@@ -60,7 +64,7 @@ export class ProductCardComponent implements OnInit{
 
     this.products.forEach(
       (element) => {
-        if(element.product == product){
+        if (element.product == product) {
           ++element.prodQuantity;
           let cart = {
             cartCount: this.cartCount + 1,
@@ -68,13 +72,13 @@ export class ProductCardComponent implements OnInit{
             totalPrice: this.totalPrice + product.prodPrice
           };
           this.productService.setCart(cart);
-          inCart=true;
+          inCart = true;
           return;
         };
       }
     );
 
-    if(inCart == false){
+    if (inCart == false) {
       let newProduct = {
         product: product,
         prodQuantity: 1
@@ -92,55 +96,58 @@ export class ProductCardComponent implements OnInit{
 
   // Add product to wishcart
   addToWishCart(product: Product): void {
+
     let inWishCart = false;
     console.log(product.prodId);
     this.wishService.addWish(product.prodId).subscribe(
-        {
-          next: (response) => {
-            console.log("Item added to wish list");
-            this.wishCartCount += 1;
-          },
-          error: (error) => {
-            console.log("Item is already in your wish list.");
-          },
-          complete: () => {
-            console.log("Request complete");
-          }
-        }  
-        );
+      {
+        next: (response) => {
+          console.log(response + "response");
+          this.prodIdList.push(1);
+        },
+        error: (error) => {
+          console.log("Item is already in your wish list.");
+        },
+        complete: () => {
+          console.log("Request complete");
+        }
+      }
+    );
 
-        
-    // this.products.forEach(
-    //   (element) => {
-    //     if(element.product == product){
-    //       ++element.quantity;
-    //       let wishCart = {
-    //         wishCartCount: this.wishCartCount + 1,
-    //         wishProducts: this.wishProducts,
-    //         wishTotalPrice: this.wishTotalPrice + product.price
-    //       };
-    //       this.productService.setWishCart(wishCart);
-          
-    //       inWishCart=true;
-    //       return;
-    //     };
+    // this.wishService.getwishListByUserId().subscribe(
+    //   (wishCart) => {
+    //     this.newWishList = wishCart;
+    //     console.log(wishCart);
     //   }
     // );
 
+    console.log(this.prodIdList);
 
-    // if(inWishCart == false){
-    //   let newWishProduct = {
-    //     wishProduct: product,
-    //     wishQuantity: 1
-    //   };
-    //   this.wishProducts.push(newWishProduct);
-    //   let wishCart = {
-    //     wishCartCount: this.wishCartCount + 1,
-    //     wishProducts: this.wishProducts,
-    //     wishTotalPrice: this.wishTotalPrice + product.price
-    //   }
-    //   this.productService.setWishCart(wishCart);
-    // }
+    if (!this.prodIdList.includes(product.prodId)) {
+      let wishCart = {
+        wishCartCount: this.wishCartCount + 1,
+        wishProducts: this.wishProducts,
+        wishTotalPrice: this.wishTotalPrice + product.prodPrice
+      };
+      this.productService.setWishCart(wishCart);
+
+      inWishCart = true;
+      return;
+    };
+
+    if (inWishCart == false) {
+      let newWishProduct = {
+        wishProduct: product,
+        wishQuantity: 1
+      };
+      this.wishProducts.push(newWishProduct);
+      let wishCart = {
+        wishCartCount: this.wishCartCount + 1,
+        wishProducts: this.wishProducts,
+        wishTotalPrice: this.wishTotalPrice + product.prodPrice
+      }
+      this.productService.setWishCart(wishCart);
+    }
   }
 
 
