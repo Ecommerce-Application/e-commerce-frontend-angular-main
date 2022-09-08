@@ -22,22 +22,20 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody id="cart-table-body ">
-      <tr *ngFor="let product of products;" class="item">
-        <!-- <td>{{product.product.id}}</td> -->
-        <td>{{product.product.name}}</td>
-        <!--Allow user to change the quantity of a product in cart-->
-        <td>
-          <input type="number" [(ngModel)]="product.quantity" (change)="productNumber()" min="1" max="3"
-            id="productNumberID">
+    <tbody id="cart-table-body">
+        <tr *ngFor="let product of products;">
+            <!-- <td>{{product.product.id}}</td> -->
+            <td>{{product.product.prodName}}</td>
+            <!--Allow user to change the quantity of a product in cart-->
+            <td>
+               <input type="number" [(ngModel)]="product.prodQuantity" (change)="productNumber()" min="1" max="3" id="productNumberID">
 
-          <!-- <td>{{product.quantity}}</td> -->
-        <td>{{product.product.description}}</td>
-        <td>{{product.product.price * product.quantity}}</td>
-        <!-- Button to remove product from cart -->
-        <td><button class="btn btn-danger" id="button-style" (click)="removeProduct(product.product)">Remove</button>
-        </td>
-      </tr>
+            <!-- <td>{{product.quantity}}</td> -->
+            <td>{{product.product.prodDesc}}</td>
+            <td>{{product.product.prodPrice * product.prodQuantity}}</td>
+            <!-- Button to remove product from cart -->
+            <td><button class="btn btn-danger" (click)="removeProduct(product.product)">Remove</button></td>
+        </tr>
     </tbody>
   </table>
 

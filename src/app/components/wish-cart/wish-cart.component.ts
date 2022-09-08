@@ -14,6 +14,7 @@ export class WishCartComponent implements OnInit {
 
   wishProducts: {
     wishProduct: Product,
+    wishQuantity: number,
   }[] = [];
   wishTotalPrice!: number;
   wishCartProducts: Product[] = [];
@@ -31,55 +32,55 @@ export class WishCartComponent implements OnInit {
         console.log(wishCart);
         this.wishCartProducts.forEach(
           (element) => {
-            this.wishTotalPrice += element.price;
+            this.wishTotalPrice += element.prodPrice;
           }
         )
       }
     );
   }
 
-  // WishProductNumber() {
-  //   const input = document.getElementById('wishProductNumberID') as HTMLInputElement | null;
-  //   // update total price of wishcart based on user input
-  //   if (input) {
-  //     this.wishTotalPrice = 0;
-  //     this.wishProducts.forEach(
-  //       (element) => {
-  //         this.wishTotalPrice += element.wishProduct.price * element.wishQuantity;
-  //       }
-  //     );
-  //     let wishCart = {
-  //       wishCartCount: this.wishProducts.length,
-  //       wishProducts: this.wishProducts,
-  //       wishTotalPrice: this.wishTotalPrice
-  //     };
-  //     this.productService.setWishCart(wishCart);
-  //   }
-  // }
+  WishProductNumber() {
+    const input = document.getElementById('wishProductNumberID') as HTMLInputElement | null;
+    // update total price of wishcart based on user input
+    if (input) {
+      this.wishTotalPrice = 0;
+      this.wishProducts.forEach(
+        (element) => {
+          this.wishTotalPrice += element.wishProduct.prodPrice * element.wishProduct.prodQuantity;
+        }
+      );
+      let wishCart = {
+        wishCartCount: this.wishProducts.length,
+        wishProducts: this.wishProducts,
+        wishTotalPrice: this.wishTotalPrice
+      };
+      this.productService.setWishCart(wishCart);
+    }
+  }
 
 
 
-  // updateWishQuantity(product: Product, quantity: number): void {
-  //   this.wishProducts.forEach(
-  //     (element) => {
-  //       if (element.wishProduct == product) {
-  //         element.wishQuantity = quantity;
-  //       }
-  //     }
-  //   );
-  //   this.wishTotalPrice = 0;
-  //   this.wishProducts.forEach(
-  //     (element) => {
-  //       this.wishTotalPrice += element.wishProduct.price * element.wishQuantity;
-  //     }
-  //   );
-  //   let wishCart = {
-  //     wishCartCount: this.wishProducts.length,
-  //     wishProducts: this.wishProducts,
-  //     wishTotalPrice: this.wishTotalPrice
-  //   };
-  //   this.productService.setWishCart(wishCart);
-  // }
+  updateWishQuantity(product: Product, quantity: number): void {
+    this.wishProducts.forEach(
+      (element) => {
+        if (element.wishProduct == product) {
+          element.wishProduct.prodQuantity = quantity;
+        }
+      }
+    );
+    this.wishTotalPrice = 0;
+    this.wishProducts.forEach(
+      (element) => {
+        this.wishTotalPrice += element.wishProduct.prodPrice * element.wishProduct.prodQuantity;
+      }
+    );
+    let wishCart = {
+      wishCartCount: this.wishProducts.length,
+      wishProducts: this.wishProducts,
+      wishTotalPrice: this.wishTotalPrice
+    };
+    this.productService.setWishCart(wishCart);
+  }
 
   emptyWishCart(): void {
     let wishCart = {
@@ -100,7 +101,7 @@ export class WishCartComponent implements OnInit {
       }
     );
     this.wishProducts.splice(this.wishCartProducts.indexOf(product), 1);
-    this.wishTotalPrice -= product.price;
+    this.wishTotalPrice -= product.prodPrice;
     let wishCart = {
       wishCartCount: this.wishProducts.length,
       wishProducts: this.wishProducts,
@@ -111,7 +112,7 @@ export class WishCartComponent implements OnInit {
 
     this.wishServ.wishDelete(product.prodId).subscribe(book => {
       next: () => {this.resetDisplay();
-        } 
+        }
     })
   }
 

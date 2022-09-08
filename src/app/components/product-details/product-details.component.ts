@@ -29,7 +29,7 @@ export class ProductDetailsComponent implements OnInit {
   cartCount!: number;
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[] = [];
   // subscription!: Subscription;
   totalPrice: number = 0;
@@ -104,13 +104,13 @@ export class ProductDetailsComponent implements OnInit {
 
     let newProduct = {
       product: product,
-      quantity: 1
+      prodQuantity: 1
     };
     this.products.push(newProduct);
     let cart = {
       cartCount: this.cartCount + 1,
       products: this.products,
-      totalPrice: this.totalPrice + product.price
+      totalPrice: this.totalPrice + product.prodPrice
     }
     this.productsService.setCart(cart);
   }
