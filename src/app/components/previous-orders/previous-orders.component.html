@@ -1,0 +1,49 @@
+<p>previous-orders workhs!</p>
+<table *ngIf ="!CheckingOrder">
+    <thead>
+
+        <tr>
+            <th>Cost</th>
+            <th>Date</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+      
+        <tr *ngFor="let PreviousOrder of PreviousOrderList">
+            <td>{{PreviousOrder.total | currency: 'USD'}}</td>
+            <td>{{PreviousOrder.datePlaced?(PreviousOrder.datePlaced | date: 'MMMM,d,y,h:mm a'):"-"}}</td>
+            <td><button (click)="checkOrder(PreviousOrder.transactionId)">Check Order</button></td>
+
+        </tr>
+    </tbody>
+</table>
+<table *ngIf="CheckingOrder"><button (click)="GoBack()">Go Back</button></table>
+<table *ngIf="CheckingOrder">
+    <thead>
+       
+        <tr>
+            
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Name</th>
+            <th>Description</th>
+ 
+
+        </tr>
+    </thead>
+    <tbody>
+  
+        <tr *ngFor="let OrderItems of ProductList">
+            <td>{{OrderItems.quantity}}</td>
+            <td>{{OrderItems.productId.price | currency: 'USD'}}</td>
+            <td>{{OrderItems.productId.name}}</td>
+            <td>{{OrderItems.productId.description}}</td>
+            
+            
+
+        </tr>
+       
+    </tbody>
+</table>

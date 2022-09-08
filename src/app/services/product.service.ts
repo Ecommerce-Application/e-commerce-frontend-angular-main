@@ -75,7 +75,30 @@ export class ProductService {
   }
 
   public purchase(products: {id:number, quantity:number}[]): Observable<any> {
-    const payload = JSON.stringify(products);
+    let fixed:{prodIdDto:number,prodDtoQuantity:number}[]=[];
+    for(let p of products){
+      fixed.push({prodIdDto:p.id,prodDtoQuantity:p.quantity})
+    }
+    
+    const payload = JSON.stringify(fixed);
+    return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+  }
+  token:string = "null";
+  public finalizepurchase(total:number,products: {id:number, quantity:number}[]): Observable<any> {
+    let fixed:{productId:number,qty:number}[]=[];
+    for(let p of products){
+      fixed.push({productId:p.id,qty:p.quantity})
+    }
+    //let time = Date.now()
+    var light = {userId:null,
+    total:total,
+    datePlaced:Date.now(),
+  orderQuantityBoughts:fixed}
+    //light.userId=null
+    //light.total=total
+    //light.datePlaced = Date.now()
+    //this.token = "null"
+    const payload = JSON.stringify(light);
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 

@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WishCartComponent } from './components/wish-cart/wish-cart.component';
 import { CaroselComponent } from './components/carosel/carosel.component';
+import { PreviousOrdersComponent } from './components/previous-orders/previous-orders.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CaroselComponent } from './components/carosel/carosel.component';
     CheckoutComponent,
     DisplayProductsComponent,
     WishCartComponent,
-    CaroselComponent
+    CaroselComponent,
+    PreviousOrdersComponent
   ],
   imports: [
     BrowserModule,

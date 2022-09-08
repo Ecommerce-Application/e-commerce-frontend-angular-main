@@ -56,6 +56,7 @@ export class CheckoutComponent implements OnInit {
     );
 
     if(this.finalProducts.length > 0) {
+      this.productService.finalizepurchase(this.totalPrice,this.finalProducts)
       this.productService.purchase(this.finalProducts).subscribe(
         (resp) => console.log(resp),
         (err) => console.log(err),
