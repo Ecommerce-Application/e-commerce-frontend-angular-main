@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -16,29 +17,32 @@ export class ProductDetailsComponent implements OnInit {
     wishProduct: Product,
     wishQuantity: number
   }[] = [];
-  //wishSubscription!: Subscription;
   wishTotalPrice!: number;
+  cartCount!: number;
+  products: {
+    product: Product,
+    prodQuantity: number
+  }[] = [];
+  subscription!: Subscription;
+  totalPrice: number = 0;
 
   constructor(private productsService: ProductService, private param: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.productId = this.param.snapshot.params['id'];
     this.getProduct(parseInt(this.productId));
+    this.subscription = this.productsService.getCart().subscribe(
+      (cart) => this.cartCount = cart.cartCount
+    );
+    this.subscription = this.productsService.getWishCart().subscribe(
+      (wish) => this.wishCartCount = wish.wishCartCount
+    );
   }
-
-  cartCount!: number;
-  products: {
-    product: Product,
-    prodQuantity: number
-  }[] = [];
-  // subscription!: Subscription;
-  totalPrice: number = 0;
 
   getProduct(id: number) {
     this.productsService.getSingleProduct(id).subscribe({
       next: (response) => {
         this.prodDetail = response;
-        console.log("current product: " + this.prodDetail)
       },
       error: (err) => {
         console.log(err);
@@ -50,66 +54,31 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
-  // addToWishCart(product: Product): void {
-  //   let inWishCart = false;
+  addToWishCart(product: Product): void {
 
-  //       if(this.prodDetail){
-  //         ++this.prodDetail.quantity;
-  //         let wishCart = {
-  //           wishCartCount: this.wishCartCount + 1,
-  //           wishProducts: this.wishProducts,
-  //           wishTotalPrice: this.wishTotalPrice + product.price
-  //         };
-  //         this.productsService.setWishCart(wishCart);
-  //        // inWishCart=true;
-  //         return;
-  //       };
-
-
-  //   if(inWishCart == false){
-  //     let newWishProduct = {
-  //       wishProduct: product,
-  //       wishQuantity: 1
-  //     };
-  //     this.wishProducts.push(newWishProduct);
-  //     let wishCart = {
-  //       wishCartCount: this.wishCartCount + 1,
-  //       wishProducts: this.wishProducts,
-  //       wishTotalPrice: this.wishTotalPrice + product.price
-  //     }
-  //     this.productsService.setWishCart(wishCart);
-  //   }
-  // }
+      let newWishProduct = {
+        wishProduct: product,
+        wishQuantity: 1
+      };
+      this.wishProducts.push(newWishProduct);
+      let wishCart = {
+        wishCartCount: this.wishCartCount + 1,
+        wishProducts: this.wishProducts,
+        wishTotalPrice: this.wishTotalPrice + product.prodPrice
+      }
+      this.productsService.setWishCart(wishCart);
+  }
 
 
   addToCart(product: Product): void {
-
-    // let inCart = false;
-
-    // this.products.forEach(
-    //   (element) => {
-    //     if(element.product == product){
-    //       ++element.quantity;
-    //       let cart = {
-    //         cartCount: this.cartCount + 1,
-    //         products: this.products,
-    //         totalPrice: this.totalPrice + product.price
-    //       };
-    //       this.productsService.setCart(cart);
-    //       inCart=true;
-    //       return;
-    //     };
-    //   }
-    // );
-
-
+    console.log(this.cartCount);
     let newProduct = {
       product: product,
       prodQuantity: 1
     };
     this.products.push(newProduct);
     let cart = {
-      cartCount: this.cartCount + 1,
+      cartCount: this.cartCount += 1,
       products: this.products,
       totalPrice: this.totalPrice + product.prodPrice
     }

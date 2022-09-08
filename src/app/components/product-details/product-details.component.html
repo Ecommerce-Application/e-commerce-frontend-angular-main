@@ -1,7 +1,8 @@
 <app-navbar></app-navbar>
 <div class="container w-75 mx-auto">
   <div class="card w-100">
-    <img class="card-img-top" [src]="prodDetail.prodImage" alt="Card image cap">
+    
+    <img class="card-img-top card-image mx-auto" [src]="prodDetail.prodImage" alt="Card image cap">
     <div class="card-body">
       <h1 class="text-center display-2">{{prodDetail.prodName}}</h1>
       <p class="text-center h3">{{prodDetail.prodDesc}}</p>
@@ -11,7 +12,7 @@
 
     <div class="card-footer">
       <button class="btn btn-outline-success w-100 mb-1" (click)="addToCart(prodDetail)">Add to Cart</button>
-      <button class="btn btn-outline-success w-100 mt-1">Add to Wish List</button>
+      <button class="btn btn-outline-success w-100 mt-1"(click)=" addToWishCart(prodDetail)">Add to Wish List</button>
     </div>
 
   </div>

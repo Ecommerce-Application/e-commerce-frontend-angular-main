@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  authUrl: string = `${environment.baseUrl}/auth`;
+  authUrl: string = `${environment.baseUrl}`;
   loggedIn: boolean = false;
   // private httpOptions = {
   //   headers: new HttpHeaders({'Content-Type' : 'application/json'}),
@@ -24,7 +24,7 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     const payload = {userEmail:email, userPassword:password};
     // return this.http.post<HttpResponse <any>>(`${this.authUrl}/login`, payload, {headers: this.httpOptions.headers, observe: 'response' as 'body'});
-    return this.http.post<HttpResponse<any>>(`${this.authUrl}/login`, payload, {headers: this.header, observe: 'response' });
+    return this.http.post<HttpResponse<any>>(`${this.authUrl}/auth/login`, payload, {headers: this.header, observe: 'response' });
   }
 
   logout(): void{
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
-    const payload = {firstName: firstName, lastName: lastName, email: email, password: password};
+    const payload = {firstName: firstName, lastName: lastName, userEmail: email, userPassword: password};
     return this.http.post<HttpResponse <any>>(`${this.authUrl}/register`, payload, {headers: this.header, observe: 'response'});
   }
 }
