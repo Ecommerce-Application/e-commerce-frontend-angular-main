@@ -9,10 +9,10 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class SearchPageComponent implements OnInit {
 
-  constructor(private productsService: ProductService, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute) { }
   param: string = '';
   type: string = '';
-  filteredProducts: [] = [];
+  filteredProducts: any;
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
@@ -25,8 +25,9 @@ export class SearchPageComponent implements OnInit {
   }
 
   getFilteredProducts(searchParam: string, searchType: string) {
-    this.productsService.searchProduct(searchParam, searchType).subscribe({
+    this.productService.searchProduct(searchParam, searchType).subscribe({
       next: (response) => {
+        this.filteredProducts = response;
         console.log(response);
       },
       error: (err) =>{

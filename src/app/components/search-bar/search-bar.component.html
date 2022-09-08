@@ -11,7 +11,7 @@
 
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="search product" name="search" [(ngModel)]="searchParam">
-    <button class="btn btn-primary" (click)="searchProduct()">Search</button>
+    <button class="btn btn-primary" (click)="filteredProducts()">Search</button>
 
     <select class="form-select" [(ngModel)]="searchType">
         <option selected value="name">Search By:</option>

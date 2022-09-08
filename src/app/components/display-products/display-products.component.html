@@ -1,6 +1,16 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <app-search-bar></app-search-bar>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="search product" name="search" [(ngModel)]="param">
+        <button class="btn btn-primary" (click)="getFilteredProducts()">Search</button>
+    
+        <select class="form-select" [(ngModel)]="type">
+            <option selected value="name">Search By:</option>
+            <option value="name">Name</option>
+            <option value="description">Description</option>
+            <option value="price">Price</option>
+          </select>
+    </div>
     <div class="row align-items-start">
        <div class="col" *ngFor="let product of allProducts">
             <app-product-card

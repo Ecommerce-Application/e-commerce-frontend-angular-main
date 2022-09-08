@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -11,6 +12,10 @@ export class DisplayProductsComponent implements OnInit {
 
   allProducts: Product[] = [];
 
+  param: any;
+  type: any;
+  
+
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -19,6 +24,20 @@ export class DisplayProductsComponent implements OnInit {
       (err) => console.log(err),
       () => console.log("Products Retrieved")
     );
+  }
+
+  getFilteredProducts() {
+
+    this.productService.searchProduct(this.param, this.type).subscribe({
+      next: (response) => {
+        this.allProducts = response;
+        console.log(response);
+      },
+      error: (err) =>{
+        console.log(err);
+      }
+    })
+
   }
 
 }
