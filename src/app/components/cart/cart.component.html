@@ -1,8 +1,20 @@
 <app-navbar></app-navbar>
-<table class="table table-striped" id="cart-table">
+<div>
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-danger mx-1 mt-4" id="button-style" [routerLink]="['/home']">Back</button>
+    </div>
+    <div class="col-md-4 offset-md-6">
+      <button class="btn btn-warning mx-1 mt-4" id="button-style" (click)="emptyCart()">Empty Cart</button>
+      <button class="btn btn-primary mx-1 mt-4" id="button-style" [routerLink]="['/checkout']">Proceed to
+        Checkout(${{totalPrice}})</button>
+    </div>
+  </div>
+
+  <table class="table table-striped" id="cart-table">
     <thead>
       <tr>
-         <th scope="col">ID</th>
+        <!-- <th scope="col">ID</th> -->
         <th scope="col">Name</th>
         <th scope="col">Quantity</th>
         <th scope="col">Description</th>
@@ -10,22 +22,31 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody id="cart-table-body">
-        <tr *ngFor="let product of products;">
-            <td>{{product.product.id}}</td> 
-            <td>{{product.product.name}}</td>
-            <!--Allow user to change the quantity of a product in cart-->
-            <td>
-               <input type="number" [(ngModel)]="product.quantity" (change)="productNumber()" min="1" max="3" id="productNumberID">
+    <tbody id="cart-table-body ">
+      <tr *ngFor="let product of products;" class="item">
+        <!-- <td>{{product.product.id}}</td> -->
+        <td>{{product.product.name}}</td>
+        <!--Allow user to change the quantity of a product in cart-->
+        <td>
+          <input type="number" [(ngModel)]="product.quantity" (change)="productNumber()" min="1" max="3"
+            id="productNumberID">
 
-           <td>{{product.quantity}}</td> 
-            <td>{{product.product.description}}</td>
-            <td>{{product.product.price * product.quantity}}</td>
-            <!-- Button to remove product from cart -->
-            <td><button class="btn btn-danger" (click)="removeProduct(product.product)">Remove</button></td>
-        </tr>
+          <!-- <td>{{product.quantity}}</td> -->
+        <td>{{product.product.description}}</td>
+        <td>{{product.product.price * product.quantity}}</td>
+        <!-- Button to remove product from cart -->
+        <td><button class="btn btn-danger" id="button-style" (click)="removeProduct(product.product)">Remove</button>
+        </td>
+      </tr>
     </tbody>
-</table>
-<button class="btn btn-danger" [routerLink]="['/home']">Back</button>
-<button class="btn btn-warning" (click)="emptyCart()">Empty Cart</button>
-<button class="btn btn-primary" [routerLink]="['/checkout']">Proceed to Checkout (${{totalPrice}})</button>
+  </table>
+
+  <div class="row">
+    <div class="col-md-4 offset-md-8">
+      <button class="btn btn-warning mx-1 mt-4" id="button-style" (click)="emptyCart()">Empty Cart</button>
+      <button class="btn btn-primary mx-1 mt-4" id="button-style" [routerLink]="['/checkout']">Proceed to
+        Checkout(${{totalPrice}})</button>
+    </div>
+  </div>
+
+</div>

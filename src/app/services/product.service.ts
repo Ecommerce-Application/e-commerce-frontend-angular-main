@@ -29,6 +29,7 @@ interface WishCart {
 export class ProductService {
 
   private productUrl: string = "/api/product";
+  private wishUrl: string = "/api/wish";
 
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
@@ -101,7 +102,7 @@ export class ProductService {
       (cart) => {
         cart.products.forEach(
           (element, index) => {
-            if (element.product.id === product.id) {
+            if (element.product.prodId === product.prodId) {
               cart.products.splice(index, 1);
             }
           }
@@ -121,7 +122,7 @@ export class ProductService {
       (wishCart) => {
         wishCart.wishProducts.forEach(
           (element, index) => {
-            if (element.wishProduct.id === product.id) {
+            if (element.wishProduct.prodId === product.prodId) {
               wishCart.wishProducts.splice(index, 1);
             }
           }
