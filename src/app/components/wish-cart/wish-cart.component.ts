@@ -31,9 +31,10 @@ export class WishCartComponent implements OnInit {
         console.log(wishCart);
         this.wishCartProducts.forEach(
           (element) => {
-            this.wishTotalPrice += element.price;
+            this.wishTotalPrice += element.prodPrice;
           }
         )
+        
       }
     );
   }
@@ -82,12 +83,10 @@ export class WishCartComponent implements OnInit {
   // }
 
   emptyWishCart(): void {
-    let wishCart = {
-      wishCartCount: 0,
-      wishProducts: [],
-      wishTotalPrice: 0.00
-    };
-    this.productService.setWishCart(wishCart);
+    this.wishServ.wishDeleteAll().subscribe(
+      (response) => {
+        console.log("delete all");
+      });
     this.router.navigate(['/home']);
   }
 
@@ -100,19 +99,20 @@ export class WishCartComponent implements OnInit {
       }
     );
     this.wishProducts.splice(this.wishCartProducts.indexOf(product), 1);
-    this.wishTotalPrice -= product.price;
+    this.wishTotalPrice -= product.prodPrice;
     let wishCart = {
       wishCartCount: this.wishProducts.length,
       wishProducts: this.wishProducts,
       wishTotalPrice: this.wishTotalPrice
     };
-    this.wishServ.wishDelete(product.prodId);
+    this.wishServ.wishDelete(product.prodId).subscribe(
+      (response) => {
+        console.log("delete wish");
+        this.ngOnInit();
+      });
+    
+    // this.wishServ.setWishCart(wishCart);
 
-
-    this.wishServ.wishDelete(product.prodId).subscribe(book => {
-      next: () => {this.resetDisplay();
-        } 
-    })
   }
 
 

@@ -8,7 +8,7 @@ interface Cart {
   cartCount: number;
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[];
   totalPrice: number;
 }
@@ -90,7 +90,7 @@ export class ProductService {
           }
         );
         cart.cartCount -= 1;
-        cart.totalPrice -= product.price;
+        cart.totalPrice -= product.prodPrice;
         this.setCart(cart);
       }
     );
@@ -110,7 +110,7 @@ export class ProductService {
           }
         );
         wishCart.wishCartCount -= 1;
-        wishCart.wishTotalPrice -= product.price;
+        wishCart.wishTotalPrice -= product.prodPrice;
         this.setWishCart(wishCart);
       }
     );

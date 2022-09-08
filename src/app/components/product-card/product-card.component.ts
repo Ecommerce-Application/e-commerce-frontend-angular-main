@@ -15,7 +15,7 @@ export class ProductCardComponent implements OnInit{
   cartCount!: number;
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[] = [];
   subscription!: Subscription;
   totalPrice: number = 0;
@@ -61,11 +61,11 @@ export class ProductCardComponent implements OnInit{
     this.products.forEach(
       (element) => {
         if(element.product == product){
-          ++element.quantity;
+          ++element.prodQuantity;
           let cart = {
             cartCount: this.cartCount + 1,
             products: this.products,
-            totalPrice: this.totalPrice + product.price
+            totalPrice: this.totalPrice + product.prodPrice
           };
           this.productService.setCart(cart);
           inCart=true;
@@ -77,13 +77,13 @@ export class ProductCardComponent implements OnInit{
     if(inCart == false){
       let newProduct = {
         product: product,
-        quantity: 1
+        prodQuantity: 1
       };
       this.products.push(newProduct);
       let cart = {
         cartCount: this.cartCount + 1,
         products: this.products,
-        totalPrice: this.totalPrice + product.price
+        totalPrice: this.totalPrice + product.prodPrice
       }
       this.productService.setCart(cart);
     }
@@ -98,7 +98,7 @@ export class ProductCardComponent implements OnInit{
         {
           next: (response) => {
             console.log("Item added to wish list");
-            wishCartCount: this.wishCartCount + 1;
+            this.wishCartCount += 1;
           },
           error: (error) => {
             console.log("Item is already in your wish list.");
