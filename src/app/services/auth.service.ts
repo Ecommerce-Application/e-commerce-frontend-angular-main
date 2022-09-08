@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  authUrl: string = `${environment.baseUrl}/api/auth`;
+  authUrl: string = `${environment.baseUrl}/auth`;
   loggedIn: boolean = false;
   // private httpOptions = {
   //   headers: new HttpHeaders({'Content-Type' : 'application/json'}),
@@ -25,7 +25,6 @@ export class AuthService {
     const payload = {userEmail:email, userPassword:password};
     // return this.http.post<HttpResponse <any>>(`${this.authUrl}/login`, payload, {headers: this.httpOptions.headers, observe: 'response' as 'body'});
     return this.http.post<HttpResponse<any>>(`${this.authUrl}/login`, payload, {headers: this.header, observe: 'response' });
-
   }
 
   logout(): void{

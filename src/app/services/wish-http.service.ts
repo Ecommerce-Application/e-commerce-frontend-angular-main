@@ -9,7 +9,7 @@ import { Wish } from '../models/wish';
   providedIn: 'root'
 })
 export class WishHttpService {
-  private wishUrl: string = "/api/wish";
+  private wishUrl: string = "/wish";
 
   sessiontoken = sessionStorage.getItem('token');
   uId = sessionStorage.getItem('userId');
@@ -22,7 +22,7 @@ export class WishHttpService {
   constructor(private http: HttpClient) { }
 
   public getwishListByUserId(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.baseUrl+this.wishUrl+this.uId, this.httpOptions);
+    return this.http.get<Product[]>(environment.baseUrl+this.wishUrl+"/get/"+this.uId, this.httpOptions);
   }
 
   addWish(pId:number): Observable<Wish>{
