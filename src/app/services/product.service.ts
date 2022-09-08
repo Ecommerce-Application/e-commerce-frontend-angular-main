@@ -8,7 +8,7 @@ interface Cart {
   cartCount: number;
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[];
   totalPrice: number;
 }
@@ -70,27 +70,27 @@ export class ProductService {
     return this.http.get<Product[]>(environment.baseUrl+this.productUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
-  public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+id);
+  public getSingleProduct(prodId: number): Observable<Product> {
+    return this.http.get<Product>(environment.baseUrl+prodId);
   }
 
-  public purchase(products: {id:number, quantity:number}[]): Observable<any> {
+  public purchase(products: {prodId:number, prodQuantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
- public removeProduct(product: Product): void {
+  public removeProduct(product: Product): void {
     this.getCart().subscribe(
       (cart) => {
         cart.products.forEach(
           (element, index) => {
-            if (element.product.id === product.id) {
+            if (element.product.prodId === product.prodId) {
               cart.products.splice(index, 1);
             }
           }
         );
         cart.cartCount -= 1;
-        cart.totalPrice -= product.price;
+        cart.totalPrice -= product.prodPrice;
         this.setCart(cart);
       }
     );
@@ -104,13 +104,13 @@ export class ProductService {
       (wishCart) => {
         wishCart.wishProducts.forEach(
           (element, index) => {
-            if (element.wishProduct.id === product.id) {
+            if (element.wishProduct.prodId === product.prodId) {
               wishCart.wishProducts.splice(index, 1);
             }
           }
         );
         wishCart.wishCartCount -= 1;
-        wishCart.wishTotalPrice -= product.price;
+        wishCart.wishTotalPrice -= product.prodPrice;
         this.setWishCart(wishCart);
       }
     );

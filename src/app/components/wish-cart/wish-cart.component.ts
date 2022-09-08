@@ -40,7 +40,7 @@ export class WishCartComponent implements OnInit {
       this.wishTotalPrice = 0;
       this.wishProducts.forEach(
         (element) => {
-          this.wishTotalPrice += element.wishProduct.price * element.wishQuantity;
+          this.wishTotalPrice += element.wishProduct.prodPrice * element.wishQuantity;
         }
       );
       let wishCart = {
@@ -65,7 +65,7 @@ export class WishCartComponent implements OnInit {
     this.wishTotalPrice = 0;
     this.wishProducts.forEach(
       (element) => {
-        this.wishTotalPrice += element.wishProduct.price * element.wishQuantity;
+        this.wishTotalPrice += element.wishProduct.prodPrice * element.wishQuantity;
       }
     );
     let wishCart = {
@@ -89,13 +89,13 @@ export class WishCartComponent implements OnInit {
   removeWishProduct(product: Product): void {
     this.wishProducts.forEach(
       (element, index) => {
-        if (element.wishProduct.id === product.id) {
+        if (element.wishProduct.prodId === product.prodId) {
           this.wishProducts.splice(index, 1);
         }
       }
     );
     this.wishProducts.splice(this.wishCartProducts.indexOf(product), 1);
-    this.wishTotalPrice -= product.price;
+    this.wishTotalPrice -= product.prodPrice;
     let wishCart = {
       wishCartCount: this.wishProducts.length,
       wishProducts: this.wishProducts,
