@@ -38,6 +38,7 @@ export class ProductDetailsComponent implements OnInit {
     this.productsService.getSingleProduct(id).subscribe({
       next: (response) => {
         this.prodDetail = response;
+        console.log("current product: " + this.prodDetail)
       },
       error: (err) => {
         console.log(err);

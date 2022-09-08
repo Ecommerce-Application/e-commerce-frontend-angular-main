@@ -71,7 +71,7 @@ export class ProductService {
   }
 
   public getSingleProduct(prodId: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+prodId);
+    return this.http.get<Product>(environment.baseUrl+'/prod/'+prodId);
   }
 
   public purchase(products: {prodId:number, prodQuantity:number}[]): Observable<any> {
