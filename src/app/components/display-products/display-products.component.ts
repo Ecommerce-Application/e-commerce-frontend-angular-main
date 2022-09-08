@@ -15,10 +15,13 @@ export class DisplayProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(
-      (resp) => this.allProducts = resp,
+      (resp) => { this.allProducts = resp;
+      console.log("http response: " + resp); },
+
       (err) => console.log(err),
       () => console.log("Products Retrieved")
     );
+    
   }
 
 }

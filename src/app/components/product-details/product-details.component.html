@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
 <div class="container w-75 mx-auto">
   <div class="card w-100">
-    <img class="card-img-top" [src]="prodDetail.image" alt="Card image cap">
+    <img class="card-img-top" [src]="prodDetail.prodImage" alt="Card image cap">
     <div class="card-body">
-      <h1 class="text-center display-2">{{prodDetail.name}}</h1>
-      <p class="text-center h3">{{prodDetail.description}}</p>
-      <p type="number" class="text-center" >Price: ${{prodDetail.price}}</p>
-      <p type="number" class="text-center"  >Quantity: {{prodDetail.quantity}}</p>
+      <h1 class="text-center display-2">{{prodDetail.prodName}}</h1>
+      <p class="text-center h3">{{prodDetail.prodDesc}}</p>
+      <p type="number" class="text-center" >Price: ${{prodDetail.prodPrice}}</p>
+      <p type="number" class="text-center"  >Quantity: {{prodDetail.prodQuantity}}</p>
     </div>
 
     <div class="card-footer">

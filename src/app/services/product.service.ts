@@ -28,7 +28,7 @@ interface WishCart {
 })
 export class ProductService {
 
-  private productUrl: string = "/product";
+  private productUrl: string = "/prod";
   private wishUrl: string = "/wish";
 
   private _cart = new BehaviorSubject<Cart>({
