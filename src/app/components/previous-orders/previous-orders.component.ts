@@ -13,31 +13,15 @@ export class PreviousOrdersComponent implements OnInit {
   constructor(private previousOrder: PreviousorderService) { }
 
   CheckingOrder:boolean = false
-  PreviousOrderList:PreviousOrder[]=[
-    {"transactionId": 2,"userId": 2,"total": 200.89,"datePlaced": 25898585,
-          "orderQuantityBoughts": [
-              {"productId": {"id": 1,"quantity": 50,"price": 15.89,"description": "ball of choas","image": "pathimage","name": "choas ball"},
-                  "quantity": 5
-              },
-              {
-                  "productId": {
-                      "id": 2,
-                      "quantity": 50,
-                      "price": 15.89,
-                      "description": "batch of choas",
-                      "image": "pathimage",
-                      "name": "choas trinkets"
-                  },
-                  "quantity": 8
-              }
-          ]
-      }
-  ];
+  PreviousOrderList:PreviousOrder[]=[];
   ProductList:PreviousOrderItem[]=[];
   //PreviousOrderItemList:PreviousOrderItem[]=[];
   orderId:number = 1
 
   ngOnInit(): void {
+    window.sessionStorage.setItem('rolodex-token','1')
+    let data = sessionStorage.getItem('rolodex-token')
+    this.getOrders(1)
   }
 
 
@@ -50,8 +34,10 @@ export class PreviousOrdersComponent implements OnInit {
 ///////////this gets the orders
   getOrders(id:number){
     //Run the order here
-    this.previousOrder.getOrdersByOwner(1).subscribe(
+    this.previousOrder.getOrdersByOwner(id).subscribe(
       (response)=>{
+        console.log("in check order")
+        console.log(response)
         this.PreviousOrderList= response
 
       }

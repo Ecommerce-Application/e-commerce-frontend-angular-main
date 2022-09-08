@@ -1,14 +1,17 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+//switch let to const to allow token to be changed
 
-export const environment = {
+export let environment = {
   production: false,
   withCredentials: true,
   baseUrl: "http://localhost:5000/api",
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'rolodex-token': 'hi'
+    
   },
 };
 

@@ -12,21 +12,21 @@ export class ProductInfo{
          //                 "quantity": 8
          //             }
  
-    id:number;
-    quantity:number;
-    price:number;
-    description:string;
-    image:string;
-    name:string;
+    prodId:number;
+    prodQuantity:number;
+    prodPrice:number;
+    prodDesc:string;
+    prodImage:string;
+    prodName:string;
 
     
     constructor(id:number,quantity:number,price:number,description:string,image:string,name:string){
-        this.id = id;
-        this.quantity = quantity;
-        this.price = price;
-        this.description = description;
-        this.image = image;
-        this.name = name;
+        this.prodId = id;
+        this.prodQuantity = quantity;
+        this.prodPrice = price;
+        this.prodDesc = description;
+        this.prodImage = image;
+        this.prodName = name;
  
      }
  }

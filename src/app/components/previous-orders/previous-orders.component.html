@@ -37,9 +37,9 @@
   
         <tr *ngFor="let OrderItems of ProductList">
             <td>{{OrderItems.quantity}}</td>
-            <td>{{OrderItems.productId.price | currency: 'USD'}}</td>
-            <td>{{OrderItems.productId.name}}</td>
-            <td>{{OrderItems.productId.description}}</td>
+            <td>{{OrderItems.productId.prodPrice| currency: 'USD'}}</td>
+            <td>{{OrderItems.productId.prodName}}</td>
+            <td>{{OrderItems.productId.prodDesc}}</td>
             
             
 

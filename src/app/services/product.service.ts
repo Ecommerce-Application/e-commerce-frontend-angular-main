@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
@@ -85,21 +85,24 @@ export class ProductService {
   }
   token:string = "null";
   public finalizepurchase(total:number,products: {id:number, quantity:number}[]): Observable<any> {
-    let fixed:{productId:number,qty:number}[]=[];
-    for(let p of products){
-      fixed.push({productId:p.id,qty:p.quantity})
-    }
+    let fixed:{productId:number,qty:number}[]=[{productId:1,qty:10}];
+
+    // for(let p of products){
+    //   fixed.push({productId:p.id,qty:p.quantity})
+    // }
+
+  
     //let time = Date.now()
-    var light = {userId:null,
+    var light = {userId:1,
     total:total,
     datePlaced:Date.now(),
   orderQuantityBoughts:fixed}
-    //light.userId=null
-    //light.total=total
-    //light.datePlaced = Date.now()
-    //this.token = "null"
+   
     const payload = JSON.stringify(light);
-    return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+    let id=window.sessionStorage.getItem('rolodex-token');
+    environment.headers['rolodex-token']='1'
+    return this.http.post<any>(environment.baseUrl+'/order', payload, {headers: environment.headers, withCredentials: environment.withCredentials,
+    })
   }
 
  public removeProduct(product: Product): void {
