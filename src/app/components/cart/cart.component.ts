@@ -12,7 +12,7 @@ export class CartComponent implements OnInit {
 
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[] = [];
   totalPrice!: number;
   cartProducts: Product[] = [];
@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
       this.totalPrice = 0;
       this.products.forEach(
         (element) => {
-          this.totalPrice += element.product.price * element.quantity;
+          this.totalPrice += element.product.prodPrice * element.prodQuantity;
         }
       );
       let cart = {
@@ -55,14 +55,14 @@ export class CartComponent implements OnInit {
     this.products.forEach(
       (element) => {
         if (element.product == product) {
-          element.quantity = quantity;
+          element.prodQuantity = quantity;
         }
       }
     );
     this.totalPrice = 0;
     this.products.forEach(
       (element) => {
-        this.totalPrice += element.product.price * element.quantity;
+        this.totalPrice += element.product.prodPrice * element.prodQuantity;
       }
     );
     let cart = {
@@ -86,13 +86,13 @@ export class CartComponent implements OnInit {
   removeProduct(product: Product): void {
     this.products.forEach(
       (element, index) => {
-        if (element.product.id === product.id) {
+        if (element.product.prodId === product.prodId) {
           this.products.splice(index, 1);
         }
       }
     );
     this.cartProducts.splice(this.cartProducts.indexOf(product), 1);
-    this.totalPrice -= product.price;
+    this.totalPrice -= product.prodPrice;
     let cart = {
       cartCount: this.products.length,
       products: this.products,

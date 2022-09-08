@@ -8,7 +8,7 @@ interface Cart {
   cartCount: number;
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[];
   totalPrice: number;
 }
@@ -28,7 +28,8 @@ interface WishCart {
 })
 export class ProductService {
 
-  private productUrl: string = "/api/product";
+  private productUrl: string = "/product";
+  private wishUrl: string = "/wish";
 
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
@@ -63,7 +64,6 @@ export class ProductService {
   }
 
 
-
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
@@ -71,7 +71,7 @@ export class ProductService {
   }
 
   public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+id);
+    return this.http.get<Product>(environment.baseUrl+this.productUrl+"/"+id);
   }
 
   public purchase(products: {id:number, quantity:number}[]): Observable<any> {
@@ -84,13 +84,13 @@ export class ProductService {
       (cart) => {
         cart.products.forEach(
           (element, index) => {
-            if (element.product.id === product.id) {
+            if (element.product.prodId === product.prodId) {
               cart.products.splice(index, 1);
             }
           }
         );
         cart.cartCount -= 1;
-        cart.totalPrice -= product.price;
+        cart.totalPrice -= product.prodPrice;
         this.setCart(cart);
       }
     );
@@ -104,13 +104,13 @@ export class ProductService {
       (wishCart) => {
         wishCart.wishProducts.forEach(
           (element, index) => {
-            if (element.wishProduct.id === product.id) {
+            if (element.wishProduct.prodId === product.prodId) {
               wishCart.wishProducts.splice(index, 1);
             }
           }
         );
         wishCart.wishCartCount -= 1;
-        wishCart.wishTotalPrice -= product.price;
+        wishCart.wishTotalPrice -= product.prodPrice;
         this.setWishCart(wishCart);
       }
     );

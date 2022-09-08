@@ -13,11 +13,12 @@ export class CheckoutComponent implements OnInit {
 
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[] = [];
   totalPrice!: number;
   cartProducts: Product[] = [];
   finalProducts: {id: number, quantity: number}[] = [];
+  loadUserInfo: boolean = false;
 
   checkoutForm = new UntypedFormGroup({
     fname: new UntypedFormControl('', Validators.required),
@@ -49,8 +50,8 @@ export class CheckoutComponent implements OnInit {
   onSubmit(): void {
     this.products.forEach(
       (element) => {
-        const id = element.product.id;
-        const quantity = element.quantity
+        const id = element.product.prodId;
+        const quantity = element.prodQuantity
         this.finalProducts.push({id, quantity})
       }
     );
@@ -75,4 +76,5 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  
 }
