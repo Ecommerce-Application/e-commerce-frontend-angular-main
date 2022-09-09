@@ -35,7 +35,7 @@ import { CaroselComponent } from './components/carosel/carosel.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ProductCardComponent],
+  providers: [ProductCardComponent, NavbarComponent, WishCartComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

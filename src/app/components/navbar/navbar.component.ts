@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { WishHttpService } from 'src/app/services/wish-http.service';
+import { WishCartComponent } from '../wish-cart/wish-cart.component';
 
 @Component({
   selector: 'app-navbar',
@@ -12,19 +13,27 @@ import { WishHttpService } from 'src/app/services/wish-http.service';
 })
 export class NavbarComponent implements OnInit{
 
-  wishCount!: number;
+  // wishCount!: number;
   cartCount!: number;
   subscription!: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductService, private wishServ: WishHttpService) { }
+  
+
+  constructor(private authService: AuthService, private router: Router, private productService: ProductService, public wishServ: WishHttpService) { 
+    // this.wishCount = this.wishServ.wishCounter;
+  }
 
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
       (cart) => this.cartCount = cart.cartCount
     );
-    this.subscription = this.productService.getWishCart().subscribe(
-      (wish) => this.wishCount = wish.wishCartCount
-    );
+
+    // this.subscription = this.wishServ.getwishListByUserId().subscribe(
+    //   (wish) => {
+    //     // this.wishCount = wish.length;
+    //     console.log(this.wishCount + "wish count onInit");            
+    //   }
+    // );
   }
 
   ngOnDestroy() {
@@ -36,4 +45,15 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['login']);
   }
 
+  // refreshCounter(): number {
+  //   console.log("refresh display called");
+  //   this.subscription = this.wishServ.getwishListByUserId().subscribe(
+  //   (wish) => this.wishCount = wish.length
+
+  // );
+    
+  //   console.log(this.wishCount);
+  //   return this.wishCount;
+    
+  // }
 }

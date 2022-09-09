@@ -18,6 +18,7 @@ interface WishCart {
 export class WishHttpService {
   private wishUrl: string = "/wish";
 
+  wishCounter!: number;
   // private _wishcart = new BehaviorSubject<WishCart>({
   //   wishCartCount: 0,
   //   wishCartProducts: [],
@@ -50,14 +51,17 @@ export class WishHttpService {
   addWish(pId:number): Observable<Wish>{
     console.log(Number(this.uId));
     console.log(pId);
+    this.wishCounter + 1;
     return this.http.post<Wish>(`${environment.baseUrl}${this.wishUrl}/post/${Number(this.uId)}/${pId}`, this.httpOptions);
   }
 
   wishDelete (pId: number):Observable<number>{
+    this.wishCounter -= 1;
     return this.http.delete<number>(`${environment.baseUrl}${this.wishUrl}/delete/${this.uId}/${pId}`, this.httpOptions);
   }
 
   wishDeleteAll ():Observable<number>{
+    this.wishCounter = 0;
     return this.http.delete<number>(`${environment.baseUrl}${this.wishUrl}/delete_all/${this.uId}`, this.httpOptions);
   }
 

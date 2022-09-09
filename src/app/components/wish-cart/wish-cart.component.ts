@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { WishHttpService } from 'src/app/services/wish-http.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
@@ -16,15 +17,31 @@ export class WishCartComponent implements OnInit {
     wishProduct: Product,
   }[] = [];
   wishTotalPrice: number = 0;
+  wishCartCounter!: number;
   wishCartProducts: Product[] = [];
 
-  constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router, private wishServ: WishHttpService) { }
+  constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router, private wishServ: WishHttpService, public navComp: NavbarComponent) { }
 
   ngOnInit(): void {
-    this.resetDisplay();
+    this.startingCartAmount();
   }
 
   resetDisplay(): void {
+    this.wishServ.getwishListByUserId().subscribe(
+      (wishCart) => {
+        this.wishCartProducts = wishCart;
+        console.log(wishCart);
+        this.wishServ.wishCounter = wishCart.length;
+        // this.wishCartProducts.forEach(
+        //   (element) => {
+        //     this.wishTotalPrice += element.prodPrice;
+        //   }
+        // )
+      }
+    );
+  }
+
+  startingCartAmount(): void {
     this.wishServ.getwishListByUserId().subscribe(
       (wishCart) => {
         this.wishCartProducts = wishCart;
@@ -107,7 +124,8 @@ export class WishCartComponent implements OnInit {
     this.wishServ.wishDelete(product.prodId).subscribe(
       (response) => {
         console.log("delete wish");
-        this.ngOnInit();
+        // this.navComp.refreshCounter();
+        this.resetDisplay();
       });
     
     // this.wishServ.setWishCart(wishCart);

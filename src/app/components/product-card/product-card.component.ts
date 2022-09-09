@@ -96,61 +96,51 @@ export class ProductCardComponent implements OnInit {
 
   // Add product to wishcart
   addToWishCart(product: Product): void {
-
-    let inWishCart = false;
-    console.log(product.prodId);
-    this.wishService.addWish(product.prodId).subscribe(
-      {
-        next: (response) => {
-          console.log(response + "response");
-          this.prodIdList.push(1);
-        },
-        error: (error) => {
-          console.log("Item is already in your wish list.");
-        },
-        complete: () => {
-          console.log("Request complete");
-        }
+    this.wishService.getwishListByUserId().subscribe(
+      (wishCart) => {
+        this.newWishList = wishCart;
+        console.log(wishCart);
       }
     );
-
-    // this.wishService.getwishListByUserId().subscribe(
-    //   (wishCart) => {
-    //     this.newWishList = wishCart;
-    //     console.log(wishCart);
-    //   }
-    // );
-
-    console.log(this.prodIdList);
-
-    if (!this.prodIdList.includes(product.prodId)) {
-      let wishCart = {
-        wishCartCount: this.wishCartCount + 1,
-        wishProducts: this.wishProducts,
-        wishTotalPrice: this.wishTotalPrice + product.prodPrice
-      };
-      this.productService.setWishCart(wishCart);
-
-      inWishCart = true;
+    if (!this.newWishList.includes(product)) {
+      // let wishCart = {
+      //   wishCartCount: this.wishCartCount + 1,
+      //   wishProducts: this.wishProducts,
+      //   wishTotalPrice: this.wishTotalPrice + product.prodPrice
+      // };
+      this.wishService.addWish(product.prodId).subscribe(
+        {
+          next: (response) => {
+            console.log(response + "response");
+            // this.wishService.wishCounter += 1;
+          },
+          error: (error) => {
+            console.log(error);
+            console.log("Item is already in your wish list.");
+          },
+          complete: () => {
+            console.log("Request complete");
+          }
+        }
+      );
       return;
     };
 
-    if (inWishCart == false) {
-      let newWishProduct = {
-        wishProduct: product,
-        wishQuantity: 1
-      };
-      this.wishProducts.push(newWishProduct);
-      let wishCart = {
-        wishCartCount: this.wishCartCount + 1,
-        wishProducts: this.wishProducts,
-        wishTotalPrice: this.wishTotalPrice + product.prodPrice
-      }
-      this.productService.setWishCart(wishCart);
-    }
   }
 
-
+    // if (inWishCart == false) {
+    //   let newWishProduct = {
+    //     wishProduct: product,
+    //     wishQuantity: 1
+    //   };
+    //   this.wishProducts.push(newWishProduct);
+    //   let wishCart = {
+    //     wishCartCount: this.wishCartCount + 1,
+    //     wishProducts: this.wishProducts,
+    //     wishTotalPrice: this.wishTotalPrice + product.prodPrice
+    //   }
+    //   this.productService.setWishCart(wishCart);
+    // }
 
 
 
