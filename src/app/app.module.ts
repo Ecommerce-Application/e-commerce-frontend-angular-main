@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WishCartComponent } from './components/wish-cart/wish-cart.component';
 import { CaroselComponent } from './components/carosel/carosel.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { CaroselComponent } from './components/carosel/carosel.component';
     CheckoutComponent,
     DisplayProductsComponent,
     WishCartComponent,
-    CaroselComponent
+    CaroselComponent,
+    ImageUploadComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

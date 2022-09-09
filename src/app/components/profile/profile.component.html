@@ -5,7 +5,7 @@
             <h3>Name</h3>
         </div>
 
-        <image-upload class="height"></image-upload>
+        <image-upload></image-upload>
     </div>
 
     <div class="flex">
@@ -24,21 +24,7 @@
 
                 <h6 *ngIf="noUserData">No Profile Information Saved</h6>
 
-               <div *ngIf="editUserMode" class="width90 marg">
-                    <div class="column">
-                        <input class="form-control" type="text" id="firstName" placeholder="First Name" minlength="2" required>
-                        <p>minimum 2 characters</p>
-                    </div>
-                    <div class="column">
-                        <input class="disabled" value="lastNam" type="text" id="lastName" placeholder="Last Name" minlength="2" required><br>
-                        <p>minimum 2 characters</p>
-                    </div>
-                    <input type="text" id="email" placeholder="Email" required>
-                    <input type="password" id="pswd" placeholder="Password" required>
-                    <input type="password" id="pswd2" placeholder="Confirm Password" required>
-                </div> 
-
-                <div *ngIf="displayUserMode" class="marg">
+                <div class="marg">
                     <div class="space">
                         <label for="firstName">Fist Name:</label>
                         <p>{{firstName}}</p>
@@ -52,12 +38,30 @@
                         <p>{{email}}</p>
                     </div>
                     <div class="space">
-                        <label for="pswd">Password:</label>
-                        <p>{{pswd}}</p>
+                        <label for="email">Password:</label>
+                        <p>*******</p>
                     </div>
-                </div> 
+                    <div *ngIf="displayUserMode">
 
-                <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveUser()">{{editUserMode ? 'Save' : 'Edit'}}</button>
+                        <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="editUser()">Edit</button>
+                    </div>
+                </div>
+
+               <div *ngIf="editUserMode" class="width90 marg">
+                    <!-- <div class="column">
+                        <input class="form-control" type="text" id="firstName" placeholder="First Name" minlength="2" required>
+                        <p>minimum 2 characters</p>
+                    </div>
+                    <div class="column">
+                        <input class="disabled" value="lastNam" type="text" id="lastName" placeholder="Last Name" minlength="2" required><br>
+                        <p>minimum 2 characters</p>
+                    </div>
+                    <input type="text" id="email" placeholder="Email" required> -->
+                    <input [(ngModel)]="pswd1" type="password" id="pswd" placeholder="Password" required>
+                    <input [(ngModel)]="pswd2" type="password" id="pswd2" placeholder="Confirm Password" required> 
+
+                    <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveUser()">Save</button>
+                </div>
                 
                 <h6>{{errorMessage}}</h6>
                 
@@ -80,23 +84,26 @@
                 <h6 *ngIf="noAddData">No Address Saved</h6>
 
                 <div *ngIf="editAddMode" class="width90 marg">
-                    <input type="text" id="street1" placeholder="Street 1" required>
-                    <input type="text" id="street2" placeholder="Street 2">
+                    <input type="text" id="street2" [(ngModel)]="street2" placeholder="Country" required>
+                    <input type="text" id="street1" [(ngModel)]="street1" placeholder="Street">
                     <div class="space-between">
-                        <input type="text" id="city" placeholder="City" required>
-                        <input type="text" id="state" placeholder="State" required minlength="2" maxlength="2">
-                        <input type="text" id="zip" placeholder="Zip Code" required minlength="5" maxlength="5">
+                        <input type="text" id="city" [(ngModel)]="city" placeholder="City" required>
+                        <input type="text" id="state" [(ngModel)]="state" placeholder="State" required minlength="2" maxlength="2">
+                        <input type="text" id="zip" [(ngModel)]="zip" placeholder="Zip Code" required minlength="5" maxlength="5">
                     </div>
+
+                    <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveAddress()">Save</button>
+
                 </div>
 
                 <div *ngIf="displayAddMode" class="marg">
                     <div class="space">
-                        <label for="street1">Street:</label>
-                        <p>{{street1}}</p>
+                        <label for="street1">Country:</label>
+                        <p>{{street2}}</p>
                     </div>
                     <div class="space">
-                        <label for="street2">Street2:</label>
-                        <p>{{street2}}</p>
+                        <label for="street2">Street:</label>
+                        <p>{{street1}}</p>
                     </div>
                     <div class="space">
                         <label for="city">City:</label>
@@ -111,9 +118,10 @@
                     <div>
 
                     </div>
+
+                    <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="editAddress()">Edit</button>
                 </div>
 
-                <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveAddress()">{{editAddMode ? 'Save' : 'Edit'}}</button>
             </div>
         </div>
 
@@ -134,12 +142,14 @@
 
                 <div *ngIf="editCCMode" class="width90 marg">
                     <div class="space-between width90">
-                        <input type="text" id="ccNum" placeholder="Credit Card Number" required>
+                        <input type="text" id="ccNum" [(ngModel)]="ccNumber" placeholder="Credit Card Number" required required minlength="12" maxlength="12">
                     </div>
                     <div class="space-between width90">
-                        <input type="text" id="exp" placeholder="Expiration MMYY" required pattern="[0-9]*" minlength="4" maxlength="4">
-                        <input type="text" id="svg" placeholder="SVG XXX" required required pattern="[0-9]*" minlength="3" maxlength="3">
+                        <input type="text" id="exp" [(ngModel)]="exp" placeholder="Expiration MMYY" required pattern="[0-9]*" minlength="4" maxlength="4">
+                        <input type="text" id="svg" [(ngModel)]="svg" placeholder="SVG XXX" required required pattern="[0-9]*" minlength="3" maxlength="3">
                     </div>
+
+                    <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveCC()">Save</button>
                 </div>
 
                 <div *ngIf="displayCCMode" class="marg">
@@ -155,9 +165,11 @@
                         <label for="svg">SVG:</label>
                         <p>{{svg}}</p>
                     </div>
+
+                    <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="editCC()">Edit</button>
+
                 </div>
 
-                <button class="upload btn btn-primary my-1" id="button-style" type="button" (click)="saveCC()">{{editCCMode ? 'Save' : 'Edit'}}</button>
             </div>
         </div>
     </div>

@@ -1,8 +1,6 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Address } from 'src/app/models/address';
-import { Payment } from 'src/app/models/payment';
-import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,22 +11,24 @@ import { UserService } from 'src/app/services/user.service';
 export class ProfileComponent implements OnInit {
 
   //Personal Info
-  firstName = this.user.firstName;
-  lastName = this.user.lastName;
-  email = this.user.email;
-  pswd = this.user.pswd;
+  firstName = "";
+  lastName = "";
+  email = "";
+  pswd1 = "";
+  pswd2 = "";
 
   //Address Info
-  street1 = this.address.address1;
-  street2 = this.address.address2;
-  city = this.address.city;
-  state = this.address.state;
-  zip = this.address.zip;
+  street1 = "";
+  street2 = "";
+  city = "";
+  state = "";
+  zip = "";
 
   //Credit Card Form
-  ccNumber = this.payment.ccNumber;
-  exp = this.payment.exp;
-  svg = this.payment.svg;
+  ccNumber = "";
+  exp = "";
+  svg = "";
+  zipCode = "00000";
 
   //Boolean Variables for Toggles
   downInfo: boolean = true;
@@ -38,7 +38,6 @@ export class ProfileComponent implements OnInit {
   downCC: boolean = true;
   upCC: boolean = false;
 
-  router: any;
   errorMessage: string = '';
 
   //Edit Display Mode Variables
@@ -56,35 +55,127 @@ export class ProfileComponent implements OnInit {
   noAddData: boolean = true;
   noCCData: boolean = true;
 
-  constructor(private http: HttpClient, private userService: UserService, private user: User, private address: Address, private payment: Payment) {}
+  //constructor( private router: Router, private http: HttpClient, private userService: UserService, private user: User, private address: Address, private payment: Payment) {}
   
+  constructor(private router: Router, private http: HttpClient, private userService: UserService) {}
   ngOnInit(): void {
+    this.getAllProfileInfo();
+    this.getAllAddInfo();
+    this.getAllCCInfo();
+  }
+
+  //GET Requests
+  getAllProfileInfo() {
+    this.userService.getAllUserInfo().subscribe({
+      next: (response) => {
+        this.firstName = response.body.user_profile.firstName;
+        this.lastName = response.body.user_profile.lastName;
+        this.email = response.body.user_profile.userEmail;
+    },
+      error: (error) => {
+        console.log(error);
+    }
+  })
+  }
+
+  getAllAddInfo() {
+    this.userService.getAllAddInfo().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.street1 = response.body.street;
+        this.city = response.body.city;
+        this.state = response.body.state;
+        this.street2 = response.body.country;
+        this.zip = response.body.zipCode;
+    },
+      error: (error) => {
+        console.log(error);
+    }
+  })
+  }
+
+  getAllCCInfo() {
+    this.userService.getAllCCInfo().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.ccNumber = response.body.ccNumber;
+        this.exp = response.body.expPeriod;
+        this.zipCode = response.body.zipCode;
+        this.svg = response.body.svcCode;
+    },
+      error: (error) => {
+        console.log(error);
+    }
+  })
   }
 
   //Update User Information
   saveUser() {
-    // this.userService.updateUser(this.pswd).subscribe({
-    //   next: (response) => {
-        
-    //   }
-    // })
+    if (this.pswd1 == this.pswd2) {
+      this.userService.updateUser(this.pswd1).subscribe({
+        next: (response) => {
+          this.editUserMode = !this.editUserMode;
+          this.displayUserMode = !this.displayUserMode;
+          this.errorMessage="";
+      },
+        error: (error) => {
+          this.errorMessage="Error, please try again";
+      }
+    })
+    } else {
+      this.errorMessage="Passwords do not match";
+      this.pswd1 = "";
+      this.pswd2 = "";
+    }
+  }
 
+  editUser() {
     this.editUserMode = !this.editUserMode;
     this.displayUserMode = !this.displayUserMode;
+
+    this.errorMessage = "";
   }
 
   //Update Address Information
   saveAddress() {
+      this.userService.updateAddress(this.street1, this.city, this.state, this.street2, this.zipCode).subscribe({
+        next: (response) => {
+          this.editAddMode = !this.editAddMode;
+          this.displayAddMode = !this.displayAddMode;
+          this.errorMessage="";
+      },
+        error: (error) => {
+          this.errorMessage="Error, please try again";
+      }
+    })
+  }
 
+  editAddress() {
     this.editAddMode = !this.editAddMode;
     this.displayAddMode = !this.displayAddMode;
+
+    this.errorMessage = "";
   }
 
   //Update Credit Card Information
   saveCC() {
+    this.userService.updateCC(this.ccNumber, this.exp, this.zipCode, this.svg).subscribe({
+      next: (response) => {
+        this.editCCMode = !this.editCCMode;
+        this.displayCCMode = !this.displayCCMode;
+        this.errorMessage="";
+  },
+  error: (error) => {
+    this.errorMessage="Error, please try again";
+      }
+    })
+  }
 
+  editCC() {
     this.editCCMode = !this.editCCMode;
     this.displayCCMode = !this.displayCCMode;
+
+    this.errorMessage = "";
   }
 
   //Toggle Arrows
@@ -108,6 +199,7 @@ export class ProfileComponent implements OnInit {
 
     this.downAdd = !this.downAdd;
     this.upAdd = !this.upAdd;
+
     this.editAddMode = false;
     this.displayAddMode = true;
   }

@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-import { environment, baseUrl } from './../../environments/environment';
+import { environment } from './../../environments/environment';
 import {
   HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpParams
+  HttpResponse,
 } from '@angular/common/http';
-import { Address } from '../models/address';
 import { Observable } from 'rxjs';
-import { Payment } from '../models/payment';
-import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,28 +12,45 @@ import { User } from '../models/user.model';
 
 export class UserService {
 
+
   httpOptions = {
   }
 
-  url: string = `${environment.baseUrl}`;
+  url: string = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
+  //User Functions
   public updateUser(pswd: string): Observable<any> {
     const updateUser = {userPassword: pswd};
     const payload = JSON.stringify(updateUser);
-    return this.http.patch<any>(`${this.url}/profile`, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+    return this.http.patch<any>(`${this.url}/profile`, payload, {headers: environment.headers, observe: 'response' })
   }
 
-  public updateAddress(address1: string, address2: string, city: string, state: string, zip: string): Observable<any> {
-    const updateAddress = {address1: address1, address2: address2, city: city, state: state, zip: zip};
+  public getAllUserInfo(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.url}/profile/all`, {headers: environment.headers, observe: 'response' })
+  }
+
+
+  //Address Functions
+  public updateAddress(street1: string, city: string, state: string, street2: string, zip: string): Observable<any> {
+    const updateAddress = {street: street1, city: city, state: state, country: street2, zipCode: zip};
     const payload = JSON.stringify(updateAddress);
-    return this.http.patch<any>(`${this.url}/profile`, payload, {headers: environment.headers});
+    return this.http.post<any>(`${this.url}/profile/uaddress`, payload, {headers: environment.headers});
   }
 
-  updateCC(ccNumber: string, exp: string, svg: string): Observable<any> {
-    const updateCC = {ccNumber: ccNumber, exp: exp, svg: svg};
+  public getAllAddInfo(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.url}/profile/uaddress`, {headers: environment.headers, observe: 'response' })
+  }
+
+  //Credit Card Functions
+  updateCC(ccNumber: string, exp: string, zip: string, svg: string): Observable<any> {
+    const updateCC = {ccNumber: ccNumber, expPeriod: exp, zipCode: zip, svcCode: svg};
     const payload = JSON.stringify(updateCC);
-    return this.http.patch<any>(`${this.url}/profile`, payload, {headers: environment.headers});
+    return this.http.post<any>(`${this.url}/profile/upayment`, payload, {headers: environment.headers, observe: 'response' });
+  }
+
+  public getAllCCInfo(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.url}/profile/upayment`, {headers: environment.headers, observe: 'response' })
   }
 }

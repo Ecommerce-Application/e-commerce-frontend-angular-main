@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 // import { Http2ServerRequest } from 'http2';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
