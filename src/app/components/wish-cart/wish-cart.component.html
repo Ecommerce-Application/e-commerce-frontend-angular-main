@@ -1,4 +1,13 @@
 <app-navbar></app-navbar>
+<div class="row">
+  <div class="col-md-2">
+    <button class="btn btn-danger mx-1 mt-4" id="button-style" [routerLink]="['/home']">Back</button>
+  </div>
+  <div class="col-md-4 offset-md-6">
+    <button class="btn btn-warning mx-1 mt-4" id="button-style" (click)="emptyWishCart()">Empty Cart</button>
+    <button class="btn btn-primary mx-1 mt-4" id="button-style" [routerLink]="['/checkout']">Proceed to Checkout (${{wishTotalPrice}})</button>
+  </div>
+</div>
 <table class="table table-striped" id="cart-table">
     <thead>
       <tr>
@@ -29,6 +38,9 @@
         </tr>
     </tbody>
 </table>
-<button class="btn btn-danger" [routerLink]="['/home']">Back</button>
-<button class="btn btn-warning" (click)="emptyWishCart()">Empty Wish Cart</button>
-<button class="btn btn-primary" [routerLink]="['/checkout']">Proceed to Checkout (${{wishTotalPrice}})</button>
+<div class="row">
+  <div class="col-md-4 offset-md-8">
+    <button class="btn btn-warning mx-1 mt-4" id="button-style" (click)="emptyWishCart()">Empty Cart</button>
+    <button class="btn btn-primary mx-1 mt-4" id="button-style" [routerLink]="['/checkout']">Proceed to Checkout (${{wishTotalPrice}})</button>
+  </div>
+</div>
