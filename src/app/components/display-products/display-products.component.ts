@@ -26,6 +26,14 @@ export class DisplayProductsComponent implements OnInit {
     );
   }
 
+  getAllProducts() {
+    this.productService.getProducts().subscribe(
+      (resp) => this.allProducts = resp,
+      (err) => console.log(err),
+      () => console.log("Products Retrieved")
+    );
+  }
+
   getFilteredProducts() {
     if (this.param === '') {
       this.errorMessage = "Search Field Is Empty"

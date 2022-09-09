@@ -65,7 +65,7 @@ export class ProductCardComponent implements OnInit{
           let cart = {
             cartCount: this.cartCount + 1,
             products: this.products,
-            totalPrice: this.totalPrice + product.price
+            totalPrice: this.totalPrice + product.prodPrice
           };
           this.productService.setCart(cart);
           inCart=true;
@@ -83,7 +83,7 @@ export class ProductCardComponent implements OnInit{
       let cart = {
         cartCount: this.cartCount + 1,
         products: this.products,
-        totalPrice: this.totalPrice + product.price
+        totalPrice: this.totalPrice + product.prodPrice
       }
       this.productService.setCart(cart);
     }
@@ -106,10 +106,10 @@ export class ProductCardComponent implements OnInit{
           complete: () => {
             console.log("Request complete");
           }
-        }  
+        }
         );
 
-        
+
     // this.products.forEach(
     //   (element) => {
     //     if(element.product == product){
@@ -120,7 +120,7 @@ export class ProductCardComponent implements OnInit{
     //         wishTotalPrice: this.wishTotalPrice + product.price
     //       };
     //       this.productService.setWishCart(wishCart);
-          
+
     //       inWishCart=true;
     //       return;
     //     };

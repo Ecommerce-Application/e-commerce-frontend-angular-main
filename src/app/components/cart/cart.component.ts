@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
       this.totalPrice = 0;
       this.products.forEach(
         (element) => {
-          this.totalPrice += element.product.price * element.quantity;
+          this.totalPrice += element.product.prodPrice * element.quantity;
         }
       );
       let cart = {
@@ -62,7 +62,7 @@ export class CartComponent implements OnInit {
     this.totalPrice = 0;
     this.products.forEach(
       (element) => {
-        this.totalPrice += element.product.price * element.quantity;
+        this.totalPrice += element.product.prodPrice * element.quantity;
       }
     );
     let cart = {
@@ -92,7 +92,7 @@ export class CartComponent implements OnInit {
       }
     );
     this.cartProducts.splice(this.cartProducts.indexOf(product), 1);
-    this.totalPrice -= product.price;
+    this.totalPrice -= product.prodPrice;
     let cart = {
       cartCount: this.products.length,
       products: this.products,
