@@ -5,10 +5,11 @@
 export const environment = {
   production: false,
   withCredentials: true,
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "http://localhost:5004/api",
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'rolodex-token': `${sessionStorage.getItem('token')}`
   },
 };
 

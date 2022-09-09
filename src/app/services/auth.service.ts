@@ -15,24 +15,27 @@ export class AuthService {
   //   headers: new HttpHeaders({'Content-Type' : 'application/json'}),
   //   // observe: 'response'
   // }
-  private header = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private header = new HttpHeaders({ 'Content-Type': 'application/json', });
 
 
 
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
-    const payload = {userEmail:email, userPassword:password};
+    const payload = { userEmail: email, userPassword: password };
     // return this.http.post<HttpResponse <any>>(`${this.authUrl}/login`, payload, {headers: this.httpOptions.headers, observe: 'response' as 'body'});
-    return this.http.post<HttpResponse<any>>(`${this.authUrl}/login`, payload, {headers: this.header, observe: 'response' });
+    return this.http.post<HttpResponse<any>>(`${this.authUrl}/login`, payload, { headers: this.header, observe: 'response' });
   }
 
-  logout(): void{
-    this.http.post(`${this.authUrl}/logout`, null);
+  logout(): Observable<any> {
+    console.log(sessionStorage.getItem('token'))
+    console.log(`${this.authUrl}/logout`);
+    console.log(environment.headers)
+    return this.http.post<any>(`${this.authUrl}/logout`, {}, { headers: environment.headers, observe: 'response' });
   }
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
-    const payload = {firstName: firstName, lastName: lastName, email: email, password: password};
-    return this.http.post<HttpResponse <any>>(`${this.authUrl}/register`, payload, {headers: this.header, observe: 'response'});
+    const payload = { firstName: firstName, lastName: lastName, userEmail: email, userPassword: password };
+    return this.http.post<HttpResponse<any>>(`${environment.baseUrl}/register`, payload, { headers: this.header, observe: 'response' });
   }
 }

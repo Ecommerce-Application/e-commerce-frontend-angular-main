@@ -52,7 +52,7 @@ export class WishHttpService {
     console.log(pId);
     return this.http.post<Wish>(`${environment.baseUrl}${this.wishUrl}/post/${Number(this.uId)}/${pId}`, this.httpOptions);
   }
-
+   
   wishDelete (pId: number):Observable<number>{
     return this.http.delete<number>(`${environment.baseUrl}${this.wishUrl}/delete/${this.uId}/${pId}`, this.httpOptions);
   }
