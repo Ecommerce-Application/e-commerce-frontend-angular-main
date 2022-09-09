@@ -13,14 +13,15 @@ import { WishCartComponent } from '../wish-cart/wish-cart.component';
 })
 export class NavbarComponent implements OnInit{
 
-  // wishCount!: number;
+  wishCount!: number;
   cartCount!: number;
   subscription!: Subscription;
-
+  _subscription!: Subscription;
   
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService, public wishServ: WishHttpService) { 
     // this.wishCount = this.wishServ.wishCounter;
+    this.subscription = this.wishServ.wishCounterS.subscribe((value) => { this.wishCount= value;});
   }
 
   ngOnInit(): void {
@@ -28,12 +29,12 @@ export class NavbarComponent implements OnInit{
       (cart) => this.cartCount = cart.cartCount
     );
 
-    // this.subscription = this.wishServ.getwishListByUserId().subscribe(
-    //   (wish) => {
-    //     // this.wishCount = wish.length;
-    //     console.log(this.wishCount + "wish count onInit");            
-    //   }
-    // );
+    this.subscription = this.wishServ.getwishListByUserId().subscribe(
+      (wish) => {
+        // this.wishCount = wish.length;
+        console.log(this.wishCount + "wish count onInit");            
+      }
+    );
   }
 
   ngOnDestroy() {

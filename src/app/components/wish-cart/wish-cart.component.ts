@@ -31,7 +31,7 @@ export class WishCartComponent implements OnInit {
       (wishCart) => {
         this.wishCartProducts = wishCart;
         console.log(wishCart);
-        this.wishServ.wishCounter = wishCart.length;
+        // this.wishServ.wishCounter = wishCart.length;
         // this.wishCartProducts.forEach(
         //   (element) => {
         //     this.wishTotalPrice += element.prodPrice;
@@ -102,6 +102,7 @@ export class WishCartComponent implements OnInit {
     this.wishServ.wishDeleteAll().subscribe(
       (response) => {
         console.log("delete all");
+        // this.wishServ.wishCounter = 0;
       });
     this.router.navigate(['/home']);
   }
@@ -125,6 +126,7 @@ export class WishCartComponent implements OnInit {
       (response) => {
         console.log("delete wish");
         // this.navComp.refreshCounter();
+        // this.wishServ.wishCounter -= 1;
         this.resetDisplay();
       });
     
