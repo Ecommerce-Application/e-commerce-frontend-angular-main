@@ -116,14 +116,4 @@ export class WishCartComponent implements OnInit {
     })
   }
 
-
-
-
-  // trying to add from wishcart to cart
-
-  // addFromWish(index: number): void {
-  //   this.productComp.addToCart(this.wishProducts[index].wishProduct);
-  // }
-
-
 }
