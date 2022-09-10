@@ -17,6 +17,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { WishCartComponent } from './components/wish-cart/wish-cart.component';
 import { CaroselComponent } from './components/carosel/carosel.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CaroselComponent } from './components/carosel/carosel.component';
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
+    ProductDetailsComponent,
     SearchBarComponent,
     SearchPageComponent,
     WishCartComponent,

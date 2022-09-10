@@ -1,18 +1,13 @@
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" [src]="productInfo.prodImage" alt="Card image cap">
+  <img class="card-img-top" [src]="productInfo.prodImage" alt="Card image cap" [routerLink]="['/product',productInfo.prodId]">
   <div class="card-body">
     <h5 class="card-title font-poppins text-center">{{productInfo.prodName}}</h5>
   </div>
   <div class="input-group input-group-sm mb-3">
     <div class="input-group-prepend mx-auto">
-      <span class="fs-5 font-poppins" >${{productInfo.prodPrice}}</span>
+      <span class="fs-5 font-poppins"
+      >${{productInfo.prodPrice}}</span>
     </div>
 
-  </div>
-
-  <div class="card-body row ">
-    <button class="btn btn-outline-success mb-1" id="button-style" (click)="addToCart(productInfo)">Add to Cart</button>
-    <button class="btn btn-outline-success mt-1" id="button-style" (click)="addToWishCart(productInfo)">Add to Wish
-      List</button>
   </div>
 </div>

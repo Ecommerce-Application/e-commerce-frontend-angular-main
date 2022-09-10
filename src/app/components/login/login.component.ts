@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
         console.log(response);
         this.authService.loggedIn=true;
         let token = response.body.tokenId;
-        // let token: string | null  = response.headers.get('rolodex-token') || '{}';
-        // debugger
         console.log(token);
         if (token != null){
           sessionStorage.setItem('token', String(token));

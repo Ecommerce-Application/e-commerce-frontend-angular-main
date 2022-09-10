@@ -8,7 +8,7 @@ interface Cart {
   cartCount: number;
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[];
   totalPrice: number;
 }
@@ -28,8 +28,8 @@ interface WishCart {
 })
 export class ProductService {
 
-  private productUrl: string = "/api/prod";
-  private wishUrl: string = "/api/wish";
+  private productUrl: string = "/prod";
+  private wishUrl: string = "/wish";
 
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
@@ -64,18 +64,17 @@ export class ProductService {
   }
 
 
-
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.baseUrl + this.productUrl, { headers: environment.headers, withCredentials: environment.withCredentials });
   }
 
-  public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl + id);
+  public getSingleProduct(prodId: number): Observable<Product> {
+    return this.http.get<Product>(environment.baseUrl+'/prod/'+prodId);
   }
 
-  public purchase(products: { id: number, quantity: number }[]): Observable<any> {
+  public purchase(products: {prodId:number, prodQuantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(environment.baseUrl + this.productUrl, payload, { headers: environment.headers, withCredentials: environment.withCredentials })
   }

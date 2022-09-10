@@ -14,7 +14,7 @@ export class WishCartComponent implements OnInit {
 
   wishProducts: {
     wishProduct: Product,
-    wishQuantity: number
+    wishQuantity: number,
   }[] = [];
   wishTotalPrice!: number;
   wishCartProducts: Product[] = [];
@@ -22,14 +22,19 @@ export class WishCartComponent implements OnInit {
   constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router, private wishServ: WishHttpService) { }
 
   ngOnInit(): void {
-    this.productService.getWishCart().subscribe(
-      (wishCart) => {
+    this.resetDisplay();
+  }
 
-        this.wishProducts = wishCart.wishProducts;
-        this.wishProducts.forEach(
-          (element) => this.wishCartProducts.push(element.wishProduct)
-        );
-        this.wishTotalPrice = wishCart.wishTotalPrice;
+  resetDisplay(): void {
+    this.wishServ.getwishListByUserId().subscribe(
+      (wishCart) => {
+        this.wishCartProducts = wishCart;
+        console.log(wishCart);
+        this.wishCartProducts.forEach(
+          (element) => {
+            this.wishTotalPrice += element.prodPrice;
+          }
+        )
       }
     );
   }
@@ -41,7 +46,7 @@ export class WishCartComponent implements OnInit {
       this.wishTotalPrice = 0;
       this.wishProducts.forEach(
         (element) => {
-          this.wishTotalPrice += element.wishProduct.prodPrice * element.wishQuantity;
+          this.wishTotalPrice += element.wishProduct.prodPrice * element.wishProduct.prodQuantity;
         }
       );
       let wishCart = {
@@ -59,14 +64,14 @@ export class WishCartComponent implements OnInit {
     this.wishProducts.forEach(
       (element) => {
         if (element.wishProduct == product) {
-          element.wishQuantity = quantity;
+          element.wishProduct.prodQuantity = quantity;
         }
       }
     );
     this.wishTotalPrice = 0;
     this.wishProducts.forEach(
       (element) => {
-        this.wishTotalPrice += element.wishProduct.prodPrice * element.wishQuantity;
+        this.wishTotalPrice += element.wishProduct.prodPrice * element.wishProduct.prodQuantity;
       }
     );
     let wishCart = {
@@ -102,22 +107,13 @@ export class WishCartComponent implements OnInit {
       wishProducts: this.wishProducts,
       wishTotalPrice: this.wishTotalPrice
     };
-    this.productService.setWishCart(wishCart);
+    this.wishServ.wishDelete(product.prodId);
 
 
-    this.wishServ.wishDelete(product.prodId).subscribe(book=>{
-      // this.getAllWishs();
+    this.wishServ.wishDelete(product.prodId).subscribe(book => {
+      next: () => {this.resetDisplay();
+        }
     })
   }
-
-
-
-
-  // trying to add from wishcart to cart
-
-  addFromWish(index : number): void {
-  this.productComp.addToCart(this.wishProducts[index].wishProduct);
-  }
-
 
 }
