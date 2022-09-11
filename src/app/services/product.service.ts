@@ -8,7 +8,7 @@ interface Cart {
   cartCount: number;
   products: {
     product: Product,
-    prodQuantity: number
+    quantity: number
   }[];
   totalPrice: number;
 }
@@ -48,20 +48,20 @@ export class ProductService {
   }
 
 
-  private _wishcart = new BehaviorSubject<WishCart>({
-    wishCartCount: 0,
-    wishProducts: [],
-    wishTotalPrice: 0.00
-  });
-  private _wishcart$ = this._wishcart.asObservable();
+  // private _wishcart = new BehaviorSubject<WishCart>({
+  //   wishCartCount: 0,
+  //   wishProducts: [],
+  //   wishTotalPrice: 0.00
+  // });
+  // private _wishcart$ = this._wishcart.asObservable();
 
-  getWishCart(): Observable<WishCart> {
-    return this._wishcart$;
-  }
+  // getWishCart(): Observable<WishCart> {
+  //   return this._wishcart$;
+  // }
 
-  setWishCart(latestValue: WishCart) {
-    return this._wishcart.next(latestValue);
-  }
+  // setWishCart(latestValue: WishCart) {
+  //   return this._wishcart.next(latestValue);
+  // }
 
 
   constructor(private http: HttpClient) { }
@@ -79,41 +79,41 @@ export class ProductService {
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
- public removeProduct(product: Product): void {
-    this.getCart().subscribe(
-      (cart) => {
-        cart.products.forEach(
-          (element, index) => {
-            if (element.product.prodId === product.prodId) {
-              cart.products.splice(index, 1);
-            }
-          }
-        );
-        cart.cartCount -= 1;
-        cart.totalPrice -= product.prodPrice;
-        this.setCart(cart);
-      }
-    );
-  }
+//  public removeProduct(product: Product, quantity: number): void {
+//     this.getCart().subscribe(
+//       (cart) => {
+//         cart.products.forEach(
+//           (element, index) => {
+//             if (element.product.prodId === product.prodId) {
+//               cart.products.splice(index, 1);
+//             }
+//           }
+//         );
+//         cart.cartCount -= 1;
+//         cart.totalPrice -= product.prodPrice * quantity;
+//         this.setCart(cart);
+//       }
+//     );
+//   }
 
 
 
 
-  public removeWishProduct(product: Product): void {
-    this.getWishCart().subscribe(
-      (wishCart) => {
-        wishCart.wishProducts.forEach(
-          (element, index) => {
-            if (element.wishProduct.prodId === product.prodId) {
-              wishCart.wishProducts.splice(index, 1);
-            }
-          }
-        );
-        wishCart.wishCartCount -= 1;
-        wishCart.wishTotalPrice -= product.prodPrice;
-        this.setWishCart(wishCart);
-      }
-    );
-        }
+  // public removeWishProduct(product: Product): void {
+  //   this.getWishCart().subscribe(
+  //     (wishCart) => {
+  //       wishCart.wishProducts.forEach(
+  //         (element, index) => {
+  //           if (element.wishProduct.prodId === product.prodId) {
+  //             wishCart.wishProducts.splice(index, 1);
+  //           }
+  //         }
+  //       );
+  //       wishCart.wishCartCount -= 1;
+  //       wishCart.wishTotalPrice -= product.prodPrice;
+  //       this.setWishCart(wishCart);
+  //     }
+  //   );
+  //       }
 
 }

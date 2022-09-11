@@ -12,10 +12,12 @@ export class CartComponent implements OnInit {
 
   products: {
     product: Product,
-    prodQuantity: number
+    quantity: number
   }[] = [];
   totalPrice!: number;
-  cartProducts: Product[] = [];
+  cartProducts: Product[]=[];
+
+  // quantity: number= 1;
 
   constructor(private productService: ProductService, private router: Router) { }
 
@@ -24,7 +26,9 @@ export class CartComponent implements OnInit {
       (cart) => {
         this.products = cart.products;
         this.products.forEach(
-          (element) => this.cartProducts.push(element.product)
+          (element) => {
+            this.cartProducts.push(element.product); 
+          }
         );
         this.totalPrice = cart.totalPrice;
       }
@@ -40,7 +44,7 @@ export class CartComponent implements OnInit {
       this.totalPrice = 0;
       this.products.forEach(
         (element) => {
-          this.totalPrice += element.product.prodPrice * element.prodQuantity;
+          this.totalPrice += element.product.prodPrice * element.quantity;
         }
       );
       let cart = {
@@ -55,14 +59,14 @@ export class CartComponent implements OnInit {
     this.products.forEach(
       (element) => {
         if (element.product == product) {
-          element.prodQuantity = quantity;
+          element.quantity = quantity;
         }
       }
     );
     this.totalPrice = 0;
     this.products.forEach(
       (element) => {
-        this.totalPrice += element.product.prodPrice * element.prodQuantity;
+        this.totalPrice += element.product.prodPrice * element.quantity;
       }
     );
     let cart = {
@@ -83,7 +87,7 @@ export class CartComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  removeProduct(product: Product): void {
+  removeProduct(product: Product, quantity: number): void {
     this.products.forEach(
       (element, index) => {
         if (element.product.prodId === product.prodId) {
@@ -92,7 +96,7 @@ export class CartComponent implements OnInit {
       }
     );
     this.cartProducts.splice(this.cartProducts.indexOf(product), 1);
-    this.totalPrice -= product.prodPrice;
+    this.totalPrice -= product.prodPrice * quantity;
     let cart = {
       cartCount: this.products.length,
       products: this.products,
