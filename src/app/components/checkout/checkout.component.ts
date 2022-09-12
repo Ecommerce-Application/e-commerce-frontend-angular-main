@@ -18,6 +18,7 @@ export class CheckoutComponent implements OnInit {
   totalPrice!: number;
   cartProducts: Product[] = [];
   finalProducts: {prodId: number, prodQuantity: number}[] = [];
+  loadUserInfo: boolean = false;
 
   checkoutForm = new UntypedFormGroup({
     fname: new UntypedFormControl('', Validators.required),
@@ -74,5 +75,6 @@ export class CheckoutComponent implements OnInit {
       this.router.navigate(['/home']);
     }
   }
+
 
 }
