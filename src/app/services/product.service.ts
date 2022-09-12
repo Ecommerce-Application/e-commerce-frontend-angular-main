@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
-import { HttpClient,HttpHeaders} from '@angular/common/http';
-=======
 import { HttpClient, HttpParams } from '@angular/common/http';
->>>>>>> View_Previous_Orders_Front_End
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
@@ -32,12 +28,9 @@ interface WishCart {
 })
 export class ProductService {
 
-<<<<<<< HEAD
-  private productUrl: string = "/prod/@Patch";
-=======
   private productUrl: string = "/prod";
+ 
   private wishUrl: string = "/wish";
->>>>>>> View_Previous_Orders_Front_End
 
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
@@ -82,27 +75,16 @@ export class ProductService {
     return this.http.get<Product>(environment.baseUrl+'/prod/'+prodId);
   }
 
-<<<<<<< HEAD
-  public purchase(products: {id:number, quantity:number}[]): Observable<any> {
-    let fixed:{prodIdDto:number,prodDtoQuantity:number}[]=[];
-    for(let p of products){
-      fixed.push({prodIdDto:p.id,prodDtoQuantity:p.quantity})
-    }
-    
-    const payload = JSON.stringify(fixed);
-    return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
-=======
   public purchase(products: {prodId:number, prodQuantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(environment.baseUrl + this.productUrl, payload, { headers: environment.headers, withCredentials: environment.withCredentials })
->>>>>>> View_Previous_Orders_Front_End
   }
   token:string = "null";
-  public finalizepurchase(total:number,products: {id:number, quantity:number}[]): Observable<any> {
+  public finalizepurchase(total:number,products: {prodId:number, prodQuantity:number}[]): Observable<any> {
     let fixed:{productId:number,qty:number}[]=[];
 
     for(let p of products){
-      fixed.push({productId:p.id,qty:p.quantity})
+      fixed.push({productId:p.prodId,qty:p.prodQuantity})
     }
 
   

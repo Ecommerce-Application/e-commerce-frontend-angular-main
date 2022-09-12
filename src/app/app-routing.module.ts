@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: "cart", component: CartComponent },
   { path: "checkout", component: CheckoutComponent },
   { path: "wishlist", component: WishCartComponent },
-  {path: "previousorder",component:PreviousOrdersComponent}
+  {path: "previousorder",component:PreviousOrdersComponent},
   { path: "product/:id", component: ProductDetailsComponent},
   { path: "search", component: SearchPageComponent},
   { path: "wishlist", component: WishCartComponent },
