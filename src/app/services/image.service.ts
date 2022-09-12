@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment, environment1 } from './../../environments/environment';
+import { environment } from './../../environments/environment';
 import {
   HttpClient,
-  HttpResponse,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -16,12 +16,13 @@ export class ImageService {
   constructor(private http: HttpClient) { }
 
   uploadImg(imgObject: FormData): Observable<any> {
-    //const uploadImg = imgObject;
-    const payload = JSON.stringify(imgObject);
-    return this.http.post(`${this.url}/profile/image`, payload, {headers: environment1.headers, observe: 'response' });
+    const headersImage = environment.headers as HttpHeaders['headers'];
+    delete headersImage['Content-Type'];
+    return this.http.post<any>(`${this.url}/profile/image`, imgObject, { headers: headersImage, observe: 'response' });
   }
 
-  public getImg(): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`${this.url}/profile/`, {headers: environment.headers, observe: 'response' })
+  public getImg(): Observable<any> {
+    return this.http.get<any>(`${this.url}/profile/image`, { headers: environment.headers, observe: 'response' })
   }
+
 }

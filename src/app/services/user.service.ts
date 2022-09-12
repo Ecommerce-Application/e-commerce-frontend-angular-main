@@ -44,8 +44,8 @@ export class UserService {
   }
 
   //Credit Card Functions
-  updateCC(ccNumber: string, exp: string, zip: string, svg: string): Observable<any> {
-    const updateCC = {ccNumber: ccNumber, expPeriod: exp, zipCode: zip, svcCode: svg};
+  updateCC(ccNumber: string, exp: string, zipCode: string, svg: string): Observable<any> {
+    const updateCC = {ccNumber: ccNumber, expPeriod: exp, zipCode: zipCode, svcCode: svg};
     const payload = JSON.stringify(updateCC);
     return this.http.post<any>(`${this.url}/profile/upayment`, payload, {headers: environment.headers, observe: 'response' });
   }

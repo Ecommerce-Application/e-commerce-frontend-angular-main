@@ -1,7 +1,9 @@
-<div class="flex">
-    <img class="image" src="/../../assets/images/rooster.png" alt="rooster profile photo">
+<div class="right">
+    <img class="image" [src]="retrievedImage" [alt]="pic_name_placeholder" *ngIf=retrievedImage>
+    <img class="image" src="/../../assets/images/rooster.png" alt="rooster profile photo" *ngIf=!retrievedImage>
+    <!-- <img class="image" src="/../../assets/images/rooster.png" alt="rooster profile photo"> -->
     <input class="none" type="file" (change)="onFileSelected($event)" #fileInput>
-    <button *ngIf="select" class="upload btn btn-primary my-1" id="button-style" type="button" (click)="fileInput.click()">Select Photo</button>
-    <button *ngIf="upload" class="upload btn btn-primary my-1" id="button-style" type="button" (click)="onUpload()">Upload</button>
-    <div>{{errorMessage}}</div>
+    <button *ngIf="select" class="btn btn-primary my-1" id="button-style" type="button" (click)="fileInput.click()">Select Photo</button>
+    <button *ngIf="upload" class="btn btn-primary my-1" id="button-style" type="button" (click)="onUpload()">Upload</button>
+    <p class="size">{{errorMessage}}</p>
 </div>

@@ -39,14 +39,15 @@
 
 h6 {
     color: red;
+    justify-content: center;
 }
 
 .icon {
     height: 40px;
 }
 
-input#ccNum {
-    width: 250%;
+.centerInput {
+    text-align: center;
 }
 
 .left {
@@ -59,11 +60,26 @@ input#ccNum {
 }
 
 .marg {
-    margin: 10px;
+    margin-top: 40px;
 }
 
 p {
     font-weight: bold;
+    font-size: 18px;
+}
+
+p.red {
+    color: red;
+}
+
+select {
+    display: block;
+    margin: 10px auto;
+}
+
+.size {
+    font-size: 13px;
+    color: red;
 }
 
 .space {
@@ -85,8 +101,16 @@ p {
     align-items: center;
 }
 
+.tiny {
+    font-size: 10px;
+}
+
 .upload {
     width: 100%;
+}
+
+.width30 {
+    width: 30%;
 }
 
 .width100 {

@@ -13,12 +13,16 @@ export class ImageUploadComponent implements OnInit {
   imgName: string = '';
   errorMessage: string = '';
 
+  retrievedImage: any;
+  pic_name_placeholder: string = '';
+
   select=true;
   upload=false;
 
   constructor(private http: HttpClient, private imgService: ImageService) {}
 
   ngOnInit(): void {
+    this.getProfilePic();
   }
 
   onFileSelected(event: any) {
@@ -29,9 +33,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onUpload() {
-    console.log(this.selectedFile);
-    alert('On upload');
-    
+    this.errorMessage="";
     //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.imgName);
@@ -40,14 +42,30 @@ export class ImageUploadComponent implements OnInit {
     //Make a call to the Spring Boot Application to save the image
     this.imgService.uploadImg(uploadImageData).subscribe({
       next: (response) => {
-          alert('Image uploaded successfully');
+
+        if (this.selectedFile) {
+          this.getProfilePic();
           this.select = !this.select;
           this.upload = !this.upload;
+          this.errorMessage="";
+        }
       },
         error: (error) => {
-          this.errorMessage="Error, please try again";
-          alert('Image did not upload, please try again');
+        this.errorMessage="File size too large";
+        this.select = !this.select;
+        this.upload = !this.upload;
       }
     });
   }
+
+  getProfilePic() {
+    this.imgService.getImg().subscribe({
+      next: (response: any) => {
+        this.pic_name_placeholder = response.body.picName;
+        this.retrievedImage = "data:" + response.body.picType + ";base64," + response.body.picByte;
+        this.errorMessage="";
+      },
+    });
+  }
+
 }

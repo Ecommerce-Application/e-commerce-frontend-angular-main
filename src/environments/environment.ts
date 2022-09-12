@@ -13,17 +13,6 @@ export const environment = {
   },
 };
 
-export const environment1 = {
-  production: false,
-  withCredentials: true,
-  baseUrl: "http://localhost:5000/api",
-  headers: {
-    'Content-Type': 'multipart/form-data;boundary="boundary"',
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
-    'rolodex-token': `${sessionStorage.getItem('token')}`
-  },
-};
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
