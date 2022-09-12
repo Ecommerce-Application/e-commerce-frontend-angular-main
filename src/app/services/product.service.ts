@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
@@ -8,7 +8,7 @@ interface Cart {
   cartCount: number;
   products: {
     product: Product,
-    quantity: number
+    prodQuantity: number
   }[];
   totalPrice: number;
 }
@@ -28,8 +28,8 @@ interface WishCart {
 })
 export class ProductService {
 
-  private productUrl: string = "/api/product";
-  private wishUrl: string = "/api/wish";
+  private productUrl: string = "/prod";
+  private wishUrl: string = "/wish";
 
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
@@ -64,23 +64,39 @@ export class ProductService {
   }
 
 
-
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.baseUrl+this.productUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
+    return this.http.get<Product[]>(environment.baseUrl + this.productUrl, { headers: environment.headers, withCredentials: environment.withCredentials });
   }
 
-  public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+id);
+  public getSingleProduct(prodId: number): Observable<Product> {
+    return this.http.get<Product>(environment.baseUrl+'/prod/'+prodId);
   }
 
-  public purchase(products: {id:number, quantity:number}[]): Observable<any> {
+  public purchase(products: {prodId:number, prodQuantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
-    return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+    return this.http.patch<any>(environment.baseUrl + this.productUrl, payload, { headers: environment.headers, withCredentials: environment.withCredentials })
   }
 
- public removeProduct(product: Product): void {
+
+  public searchProduct(value: string, searchBy: string): Observable<Product[]> {
+    let setParam = new HttpParams();
+    let param;
+    if (searchBy === "name") {
+      param = setParam.append("nameQuery", value)
+    }
+    else if (searchBy === "description") {
+      param = setParam.append("descQuery", value)
+    }
+    else if (searchBy === "price") {
+      param = setParam.append("priceQuery", value)
+    }
+    return this.http.get<Product[]>(environment.baseUrl + this.productUrl + "/search",
+      { headers: environment.headers, withCredentials: environment.withCredentials, params: param });
+  }
+
+  public removeProduct(product: Product): void {
     this.getCart().subscribe(
       (cart) => {
         cart.products.forEach(
@@ -91,7 +107,7 @@ export class ProductService {
           }
         );
         cart.cartCount -= 1;
-        cart.totalPrice -= product.price;
+        cart.totalPrice -= product.prodPrice;
         this.setCart(cart);
       }
     );
@@ -111,10 +127,11 @@ export class ProductService {
           }
         );
         wishCart.wishCartCount -= 1;
-        wishCart.wishTotalPrice -= product.price;
+        wishCart.wishTotalPrice -= product.prodPrice;
         this.setWishCart(wishCart);
       }
     );
-        }
+  }
+
 
 }
