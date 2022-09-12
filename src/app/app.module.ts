@@ -12,9 +12,13 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { DisplayProductsComponent } from './components/display-products/display-products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 import { WishCartComponent } from './components/wish-cart/wish-cart.component';
 import { CaroselComponent } from './components/carosel/carosel.component';
 import { PreviousOrdersComponent } from './components/previous-orders/previous-orders.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +30,14 @@ import { PreviousOrdersComponent } from './components/previous-orders/previous-o
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
+    ProductDetailsComponent,
+    SearchBarComponent,
+    SearchPageComponent,
     WishCartComponent,
     CaroselComponent,
-    PreviousOrdersComponent
+    PreviousOrdersComponent,
+    CaroselComponent
+
   ],
   imports: [
     BrowserModule,

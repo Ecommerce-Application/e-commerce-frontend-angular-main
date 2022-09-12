@@ -6,7 +6,9 @@ import { DisplayProductsComponent } from './components/display-products/display-
 import { LoginComponent } from './components/login/login.component';
 import { PreviousOrdersComponent } from './components/previous-orders/previous-orders.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 import { WishCartComponent } from './components/wish-cart/wish-cart.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -17,6 +19,11 @@ const routes: Routes = [
   { path: "checkout", component: CheckoutComponent },
   { path: "wishlist", component: WishCartComponent },
   {path: "previousorder",component:PreviousOrdersComponent}
+  { path: "product/:id", component: ProductDetailsComponent},
+  { path: "search", component: SearchPageComponent},
+  { path: "wishlist", component: WishCartComponent },
+  { path: "search", component: SearchPageComponent },
+  { path: "wishlist", component: WishCartComponent }
 ];
 
 @NgModule({
