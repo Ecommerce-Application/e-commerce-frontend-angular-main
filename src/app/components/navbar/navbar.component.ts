@@ -17,14 +17,18 @@ export class NavbarComponent implements OnInit{
   cartCount!: number;
   subscription!: Subscription;
   _subscription!: Subscription;
-  
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductService, public wishServ: WishHttpService) { 
-    // this.wishCount = this.wishServ.wishCounter;
+
+  constructor(private authService: AuthService, private router: Router, private productService: ProductService, public wishServ: WishHttpService) {
     this.subscription = this.wishServ.wishCounterS.subscribe((value) => { this.wishCount= value;});
   }
 
   ngOnInit(): void {
+    this.productService.getCart().subscribe(
+      (cart) => {
+        this.cartCount = cart.cartCount;
+      }
+    );
     this.subscription = this.productService.getCart().subscribe(
       (cart) => this.cartCount = cart.cartCount
     );
@@ -32,10 +36,13 @@ export class NavbarComponent implements OnInit{
     this.subscription = this.wishServ.getwishListByUserId().subscribe(
       (wish) => {
         // this.wishCount = wish.length;
-        console.log(this.wishCount + "wish count onInit");            
+        this.wishServ.wishCounter = wish.length;
+        this.wishCount = this.wishServ.wishCounter;
+        console.log(this.wishCount);
       }
     );
   }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -46,15 +53,4 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['login']);
   }
 
-  // refreshCounter(): number {
-  //   console.log("refresh display called");
-  //   this.subscription = this.wishServ.getwishListByUserId().subscribe(
-  //   (wish) => this.wishCount = wish.length
-
-  // );
-    
-  //   console.log(this.wishCount);
-  //   return this.wishCount;
-    
-  // }
 }

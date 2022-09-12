@@ -19,28 +19,15 @@ export class WishHttpService {
   private wishUrl: string = "/wish";
 
   wishCounterS: Subject<number> = new Subject<number>();
-  wishCounter: number =0; 
+  wishCounter: number =0;
   prodIdList = new Set<number>();
-  // private _wishcart = new BehaviorSubject<WishCart>({
-  //   wishCartCount: 0,
-  //   wishCartProducts: [],
-  //   wishTotalPrice: 0.00
-  // });
-  // private _wishcart$ = this._wishcart.asObservable();
 
-  // getWishCart(): Observable<WishCart> {
-  //   return this._wishcart$;
-  // }
-
-  // setWishCart(latestValue: WishCart) {
-  //   return this._wishcart.next(latestValue);
-  // }  
 
   sessiontoken = sessionStorage.getItem('token');
   uId = sessionStorage.getItem('userId');
 
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type' : 'application/json', 
+    headers: new HttpHeaders({'Content-Type' : 'application/json',
                             'rolodex-token': `${this.sessiontoken}`})
   }
 
@@ -61,19 +48,24 @@ export class WishHttpService {
     console.log(this.prodIdList);
   }
 
+
   addWish(pId:number): Observable<Wish>{
-    console.log(Number(this.uId));
-    console.log(pId);
-    this.check();
+    // check if the product is already in the wish list or not
+    // only add if it is not in the wish list
+    // only increment the wish counter if the product is not in the wish list
     if(!this.prodIdList.has(pId)){
-      this.wishCounter += 1;
+      this.wishCounter++;
       this.wishCounterS.next(this.wishCounter);
+      this.prodIdList.add(pId);
     }
     return this.http.post<Wish>(`${environment.baseUrl}${this.wishUrl}/post/${Number(this.uId)}/${pId}`, this.httpOptions);
+
   }
 
+
   wishDelete (pId: number):Observable<number>{
-    this.wishCounter -= 1;
+    this.prodIdList.delete(pId);
+    this.wishCounter--;
     this.wishCounterS.next(this.wishCounter);
     return this.http.delete<number>(`${environment.baseUrl}${this.wishUrl}/delete/${this.uId}/${pId}`, this.httpOptions);
   }

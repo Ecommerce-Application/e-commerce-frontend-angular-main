@@ -13,7 +13,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class ProductCardComponent implements OnInit {
 
-  cartCount!: number;
+  cartCount: number = 0;
   products: {
     product: Product,
     quantity: number
@@ -49,48 +49,47 @@ export class ProductCardComponent implements OnInit {
       }
     );
 
-    // this.wishSubscription = this.productService.getWishCart().subscribe(
-    //   (wishCart) => {
-    //     this.wishCartCount = wishCart.wishCartCount;
-    //     this.wishProducts = wishCart.wishProducts;
-    //     this.wishTotalPrice = wishCart.wishTotalPrice;
-    //   }
-    // );
   }
 
+
   addToCart(product: Product): void {
+    // check if product is already in cart and if product quantity is less than 4 if so,
+    // increase quantity by 1 and update total price
+    let productInCart = this.products.find((element) => {
+      return element.product.prodId === product.prodId;
+    });
 
-    let inCart = false;
+    if (productInCart) {
+      if (productInCart.quantity < 4 && product.prodQuantity > 0 && product.prodQuantity > productInCart.quantity) {
 
-    this.products.forEach(
-      (element) => {
-        if (element.product == product) {
-          ++element.quantity;
-          let cart = {
-            cartCount: this.cartCount + 1,
-            products: this.products,
-            totalPrice: this.totalPrice + product.prodPrice
-          };
-          this.productService.setCart(cart);
-          inCart = true;
-          return;
-        };
+        productInCart.quantity++;
+        this.totalPrice += Math.round(product.prodPrice);
+        this.cartCount++;
+
       }
-    );
-
-    if (inCart == false) {
-      let newProduct = {
-        product: product,
-        quantity: 1
-      };
-      this.products.push(newProduct);
-      let cart = {
-        cartCount: this.cartCount + 1,
-        products: this.products,
-        totalPrice: this.totalPrice + product.prodPrice
+      // if product quantity is 4 or more, display error message
+      else if (productInCart.quantity >= 4) {
+        this.errorMessage = "You can only buy 4 of this product at a time";
       }
-      this.productService.setCart(cart);
+    } // if product is not in cart, add it to cart and update total price
+    // if prod.quantity is less than 0 display error message
+    else {
+      if (product.prodQuantity > 0) {
+
+        this.products.push({ product: product, quantity: 1 });
+        this.totalPrice += Math.round(product.prodPrice);
+        this.cartCount++;
+
+      }
+      else {
+        this.errorMessage = "Sorry, this product is out of stock";
+      }
     }
+    this.productService.setCart({
+      cartCount: this.cartCount,
+      products: this.products,
+      totalPrice: this.totalPrice
+      });
 
   }
 
@@ -103,16 +102,10 @@ export class ProductCardComponent implements OnInit {
       }
     );
     if (!this.newWishList.includes(product)) {
-      // let wishCart = {
-      //   wishCartCount: this.wishCartCount + 1,
-      //   wishProducts: this.wishProducts,
-      //   wishTotalPrice: this.wishTotalPrice + product.prodPrice
-      // };
       this.wishService.addWish(product.prodId).subscribe(
         {
           next: (response) => {
             console.log(response + "response");
-            // this.wishService.wishCounter += 1;
           },
           error: (error) => {
             console.log(error);
@@ -127,22 +120,6 @@ export class ProductCardComponent implements OnInit {
     };
 
   }
-
-    // if (inWishCart == false) {
-    //   let newWishProduct = {
-    //     wishProduct: product,
-    //     wishQuantity: 1
-    //   };
-    //   this.wishProducts.push(newWishProduct);
-    //   let wishCart = {
-    //     wishCartCount: this.wishCartCount + 1,
-    //     wishProducts: this.wishProducts,
-    //     wishTotalPrice: this.wishTotalPrice + product.prodPrice
-    //   }
-    //   this.productService.setWishCart(wishCart);
-    // }
-
-
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

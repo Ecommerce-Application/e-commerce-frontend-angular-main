@@ -48,22 +48,6 @@ export class ProductService {
   }
 
 
-  // private _wishcart = new BehaviorSubject<WishCart>({
-  //   wishCartCount: 0,
-  //   wishProducts: [],
-  //   wishTotalPrice: 0.00
-  // });
-  // private _wishcart$ = this._wishcart.asObservable();
-
-  // getWishCart(): Observable<WishCart> {
-  //   return this._wishcart$;
-  // }
-
-  // setWishCart(latestValue: WishCart) {
-  //   return this._wishcart.next(latestValue);
-  // }
-
-
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
@@ -79,41 +63,13 @@ export class ProductService {
     return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
 
-//  public removeProduct(product: Product, quantity: number): void {
-//     this.getCart().subscribe(
-//       (cart) => {
-//         cart.products.forEach(
-//           (element, index) => {
-//             if (element.product.prodId === product.prodId) {
-//               cart.products.splice(index, 1);
-//             }
-//           }
-//         );
-//         cart.cartCount -= 1;
-//         cart.totalPrice -= product.prodPrice * quantity;
-//         this.setCart(cart);
-//       }
-//     );
-//   }
-
-
-
-
-  // public removeWishProduct(product: Product): void {
-  //   this.getWishCart().subscribe(
-  //     (wishCart) => {
-  //       wishCart.wishProducts.forEach(
-  //         (element, index) => {
-  //           if (element.wishProduct.prodId === product.prodId) {
-  //             wishCart.wishProducts.splice(index, 1);
-  //           }
-  //         }
-  //       );
-  //       wishCart.wishCartCount -= 1;
-  //       wishCart.wishTotalPrice -= product.prodPrice;
-  //       this.setWishCart(wishCart);
-  //     }
-  //   );
-  //       }
+  public getQuantity(id: number): number {
+    const cart = this._cart.getValue();
+    const product = cart.products.find(p => p.product.prodId === id);
+    if (product) {
+      return product.quantity;
+    }
+    return 0;
+  }
 
 }
