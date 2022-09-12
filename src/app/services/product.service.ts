@@ -28,7 +28,7 @@ interface WishCart {
 })
 export class ProductService {
 
-  private productUrl: string = "/api/product";
+  private productUrl: string = "/prod/@Patch";
 
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
@@ -85,22 +85,22 @@ export class ProductService {
   }
   token:string = "null";
   public finalizepurchase(total:number,products: {id:number, quantity:number}[]): Observable<any> {
-    let fixed:{productId:number,qty:number}[]=[{productId:1,qty:10}];
+    let fixed:{productId:number,qty:number}[]=[];
 
-    // for(let p of products){
-    //   fixed.push({productId:p.id,qty:p.quantity})
-    // }
+    for(let p of products){
+      fixed.push({productId:p.id,qty:p.quantity})
+    }
 
   
-    //let time = Date.now()
+    let time = Date.now()
     var light = {userId:1,
     total:total,
     datePlaced:Date.now(),
   orderQuantityBoughts:fixed}
    
     const payload = JSON.stringify(light);
-    let id=window.sessionStorage.getItem('rolodex-token');
-    environment.headers['rolodex-token']='1'
+    //let id=window.sessionStorage.getItem('rolodex-token');
+    //environment.headers['rolodex-token']='1'
     return this.http.post<any>(environment.baseUrl+'/order', payload, {headers: environment.headers, withCredentials: environment.withCredentials,
     })
   }

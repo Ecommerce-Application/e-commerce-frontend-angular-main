@@ -15,16 +15,11 @@ export class PreviousorderService {
 
       //Potentially Obsolete: We may just bring both of these at once in a larger object
       getOrdersByOwner(id:number):Observable<PreviousOrder[]>{
-        this.httpOptions.headers.append('rolodex-token', String(id))
-        return this.http.get<PreviousOrder[]>(environment.baseUrl+'/order/'+id//Route needed: expected: /orders/{id}
-        ,this.httpOptions);
+       // this.httpOptions.headers.append('rolodex-token')
+        return this.http.get<PreviousOrder[]>(environment.baseUrl+'/order'//Route needed: expected: /orders/{id}
+        ,{headers:environment.headers});
       }
 
-
-      getOrderItems(id:number):Observable<PreviousOrderItem[]>{
-        return this.http.get<PreviousOrderItem[]>(environment.baseUrl+'/orderID/'+id//Route needed: expected: /orders/{id}
-        );
-      }
 
    
 }

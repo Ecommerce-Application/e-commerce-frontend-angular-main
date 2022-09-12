@@ -40,6 +40,9 @@ export class PreviousOrdersComponent implements OnInit {
         console.log(response)
         this.PreviousOrderList= response
 
+      },(error)=>{
+        console.log("Error! invalid response")
+        console.log(error)
       }
     )
 
