@@ -10,6 +10,7 @@ import { User } from '../models/user';
 export class AuthService {
 
   authUrl: string = `${environment.baseUrl}/auth`;
+  registerUrl: string = `${environment.baseUrl}`;
   loggedIn: boolean = false;
   // private httpOptions = {
   //   headers: new HttpHeaders({'Content-Type' : 'application/json'}),
@@ -32,7 +33,7 @@ export class AuthService {
   }
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
-    const payload = {firstName: firstName, lastName: lastName, email: email, password: password};
-    return this.http.post<HttpResponse <any>>(`${this.authUrl}/register`, payload, {headers: this.header, observe: 'response'});
+    const payload = {firstName: firstName, lastName: lastName, userEmail: email, userPassword: password};
+    return this.http.post<HttpResponse <any>>(`${this.registerUrl}/register`, payload, {headers: this.header, observe: 'response'});
   }
 }
