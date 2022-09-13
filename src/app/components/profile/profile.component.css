@@ -107,6 +107,10 @@ select {
     margin-top: -200px;
 }
 
+.top2 {
+    margin-top: 75px;
+}
+
 .upload {
     width: 100%;
 }
