@@ -494,25 +494,25 @@
                 </div>
 
                 <div *ngIf="displayAddMode" class="marg width90">
-                    <div class="space">
+                    <div class="space-between">
                         <label for="street1">Country:</label>
                         <p>{{street2}}</p>
                     </div>
-                    <div class="space">
+                    <div class="space-between">
                         <label for="street2">Street:</label>
                         <p>{{street1}}</p>
                     </div>
-                    <div class="space">                        
+                    <div class="space-between">                        
                         <label for="city">City:</label>
                         <p>{{city}}</p>
                     </div>
 
-                    <div class="space">
+                    <div class="space-between">
                         <label for="state">State:</label>
                         <p>{{state}}</p>
                     </div>
 
-                    <div class="space">
+                    <div class="space-between">
                         <label for="zip">Zip Code:</label>
                         <p>{{zip}}</p>
                     </div>
@@ -637,17 +637,17 @@
 
                 <div *ngIf="displayCCMode" class="marg width90">
                     
-                    <div class="space marg">
+                    <div class="space-between marg">
                         <label for="ccNum">Credit Card Number:</label>
                         <p *ngIf="ccNumber">XXXX-XXXX-XXXX-{{ccNum4}}</p>
                     </div>
 
-                    <div class="space">
+                    <div class="space-between">
                         <label for="exp">Expiration:</label>
                         <p *ngIf='expMM'>{{expMM}}/{{expYY}}</p>
                     </div>
 
-                    <div class="space">
+                    <div class="space-between">
                         <label for="svg">SVG:</label>
                         <p>{{svg}}</p>
                     </div>
