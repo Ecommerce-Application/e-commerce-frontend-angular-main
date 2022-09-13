@@ -56,7 +56,7 @@ h6 {
 
 .margin {
     margin: 10px auto;
-    width: 70%;
+    width: 80%;
 }
 
 .marg {
@@ -84,8 +84,6 @@ select {
 
 .space {
     display: flex;
-    justify-content: space-between;
-    width: 90%;
     margin: auto;
 }
 
@@ -103,6 +101,10 @@ select {
 
 .tiny {
     font-size: 10px;
+}
+
+.top {
+    margin-top: -200px;
 }
 
 .upload {
