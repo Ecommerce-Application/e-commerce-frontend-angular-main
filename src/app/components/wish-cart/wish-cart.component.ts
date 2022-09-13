@@ -59,6 +59,7 @@ export class WishCartComponent implements OnInit {
       (response) => {
         console.log("delete all");
         this.wishServ.wishCounter = 0;
+        this.resetDisplay();
       });
     this.router.navigate(['/home']);
   }
