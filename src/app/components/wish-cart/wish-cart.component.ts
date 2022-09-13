@@ -16,7 +16,7 @@ export class WishCartComponent implements OnInit {
     wishProduct: Product,
     wishQuantity: number,
   }[] = [];
-  wishTotalPrice!: number;
+  wishTotalPrice: number = 0;
   wishCartProducts: Product[] = [];
 
   constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router, private wishServ: WishHttpService) { }
@@ -83,12 +83,10 @@ export class WishCartComponent implements OnInit {
   }
 
   emptyWishCart(): void {
-    let wishCart = {
-      wishCartCount: 0,
-      wishProducts: [],
-      wishTotalPrice: 0.00
-    };
-    this.productService.setWishCart(wishCart);
+    this.wishServ.wishDeleteAll().subscribe(
+      (response) => {
+        console.log("delete all");
+      });
     this.router.navigate(['/home']);
   }
 
@@ -107,13 +105,14 @@ export class WishCartComponent implements OnInit {
       wishProducts: this.wishProducts,
       wishTotalPrice: this.wishTotalPrice
     };
-    this.wishServ.wishDelete(product.prodId);
+    this.wishServ.wishDelete(product.prodId).subscribe(
+      (response) => {
+        console.log("delete wish");
+        this.ngOnInit();
+      });
 
+    // this.wishServ.setWishCart(wishCart);
 
-    this.wishServ.wishDelete(product.prodId).subscribe(book => {
-      next: () => {this.resetDisplay();
-        }
-    })
   }
 
 }
