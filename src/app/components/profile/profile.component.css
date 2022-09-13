@@ -50,6 +50,10 @@ h6 {
     text-align: center;
 }
 
+label {
+    padding: 1%;
+}
+
 .left {
     margin-left: 225px;
 }
@@ -57,10 +61,6 @@ h6 {
 .margin {
     margin: 10px auto;
     width: 80%;
-}
-
-.marg {
-    margin-top: 2%;
 }
 
 p {

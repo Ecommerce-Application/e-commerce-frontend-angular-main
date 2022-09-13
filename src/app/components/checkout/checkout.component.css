@@ -1,3 +1,7 @@
+.abs {
+    position: fixed;
+}
+
 .table 
 {
     margin-left: 3%;
@@ -22,6 +26,7 @@ body{
 
 .card{
     border:none;
+    padding: 1.5%;
 }
 
 .form-control {
