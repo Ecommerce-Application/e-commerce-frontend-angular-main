@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<div class="container w-75 mx-auto">
+  <div class="card w-100">
+    
+    <img class="card-img-top card-image mx-auto" [src]="prodDetail.prodImage" alt="Card image cap">
+    <div class="card-body">
+      <h1 class="text-center display-2">{{prodDetail.prodName}}</h1>
+      <p class="text-center h3">{{prodDetail.prodDesc}}</p>
+      <p type="number" class="text-center" >Price: ${{prodDetail.prodPrice}}</p>
+      <p type="number" class="text-center"  >In-Stock: {{prodDetail.prodQuantity}}</p>
+    </div>
+
+    <div class="card-footer">
+      <button class="btn btn-outline-success w-100 mb-1" (click)="addToCart(prodDetail)" id="button-style">Add to Cart</button>
+      <button class="btn btn-outline-success w-100 mt-1"(click)=" addToWishCart(prodDetail)" id="button-style">Add to Wish List</button>
+    </div>
+
+  </div>
+
+  <!-- (click)="addToWishCart(prodDetail)" -->

@@ -24,16 +24,16 @@
             <!-- <td>{{product.product.id}}</td> -->
             <td>{{product.prodName}}</td>
             <!--Allow user to change the quantity of a product in cart-->
-            
+
                <!-- <input type="number" [(ngModel)]="product.wishQuantity" (change)="WishProductNumber()" min="1" max="3" id="wishProductNumberID"> -->
 
             <!-- <td>{{product.quantity}}</td> -->
             <td>{{product.prodDesc}}</td>
-            <td>{{product.prodPrice}}</td>
+            <td>{{product.prodPrice * product.prodQuantity}}</td>
             <!-- Button to remove product from cart or add it to cart -->
             <td>
-                <button type="button" class="btn btn-danger mx-1" id="button-style" (click)="removeWishProduct(product)">Remove</button>
-                <button type="button" class="btn btn-success mx-1" id="button-style" (click)="addFromWish(this.wishCartProducts.indexOf(product))">Add to Cart</button>
+                <button type="button" class="btn btn-danger" (click)="removeWishProduct(product)">Remove</button>
+                <!-- <button type="button" class="btn btn-success" (click)="addFromWish(this.wishCartProducts.indexOf(product))">Add to Cart</button> -->
             <!-- <td><button class="btn btn-danger" (click)="removeWishProduct(product.wishProduct)">Remove</button> --> </td>
         </tr>
     </tbody>
