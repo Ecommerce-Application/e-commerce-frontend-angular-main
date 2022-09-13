@@ -11,7 +11,7 @@
     
     <div class="row">
         <div class="col-md-9">
-            <div class="card p-3" *ngIf="!loadUserInfo">
+            <div class="card" *ngIf="!loadUserInfo">
 
                 <app-profile></app-profile>
                 <div class="row">
@@ -40,22 +40,14 @@
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-3 center">
 
-            <div class="card card-blue p-3 text-white mb-3">
+            <div class="card card-blue p-2 text-white">
 
-            <span>You have to pay</span>
-                <div class="d-flex flex-row align-items-end mb-3">
-                    <h1 class="mb-0">${{totalPrice}}</h1>
-                </div>
-
-                <div class="hightlight">
-
-                    <span>100% Guaranteed Satisfaction!</span>
-                    
-
-                </div>
-                
+            <span>Total Amount Due:</span>
+                <div class="">
+                    <h1 class="">${{totalPrice}}</h1>
+                </div>                
             </div>
             
         </div>
