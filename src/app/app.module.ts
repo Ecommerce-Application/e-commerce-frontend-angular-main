@@ -37,7 +37,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     WishCartComponent,
     CaroselComponent,
     ImageUploadComponent,
-    ProfileComponent
+    ProfileComponent,
     CaroselComponent
 
   ],
