@@ -26,19 +26,19 @@
                 <h6 *ngIf="noUserData">No Profile Information Saved</h6>
 
                 <div class="marg width90">
-                    <div class="space">
+                    <div class="space-between">
                         <label for="firstName">Fist Name:</label>
                         <p>{{firstName}}</p>
                     </div>
-                    <div class="space">
+                    <div class="space-between">
                         <label for="lastName">Last Name:</label>
                         <p>{{lastName}}</p>
                     </div>
-                    <div class="space">
+                    <div class="space-between">
                         <label for="email">Email:</label>
                         <p>{{email}}</p>
                     </div>
-                    <div class="space">
+                    <div class="space-between">
                         <label for="email">Password:</label>
                         <p>*******</p>
                     </div>
@@ -59,30 +59,30 @@
                     </div>
                     <input type="text" id="email" placeholder="Email" required> -->
                     <div class="marg">
-                        <div class="space-between width90 marg">
+                        <div class="space-between marg">
                             <label class="form__label" for="pswd">Password:</label>
                         </div>
                         
-                        <div class="space-between width90 marg">
+                        <div class="space-between marg">
                             <input [(ngModel)]="pswd1" type="password" id="pswd" placeholder="Password" required>
                         </div>
 
-                        <div class="space-between width90 marg tiny">
+                        <div class="space-between  marg tiny">
                             <div>Must contain one number, one uppercase letter, one lowercase letter, one special character, and at least 8 characters</div>
                         </div>
 
-                        <div class="space-between width90 marg tiny">
+                        <div class="space-between marg tiny">
                             <p class="size">{{errorMessagePswd}}</p>
                         </div>
                     </div>
 
                     <div class="marg">
-                        <div class="space-between width90 marg">
+                        <div class="space-between marg">
                             <label class="form__label" for="pswd2">Confirm Password:</label>
                         </div>
 
-                        <div class="space-between width90 marg">
-                            <input [(ngModel)]="pswd2" type="password" id="pswd2" placeholder="Confirm Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"> 
+                        <div class="space-between marg">
+                            <input [(ngModel)]="pswd2" type="password" id="pswd2" placeholder="Confirm Password" required> 
                         </div>
                     </div>
 
