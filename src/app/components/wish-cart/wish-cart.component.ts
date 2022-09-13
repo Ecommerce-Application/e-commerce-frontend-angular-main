@@ -1,3 +1,4 @@
+import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
@@ -15,12 +16,13 @@ export class WishCartComponent implements OnInit {
 
   wishProducts: {
     wishProduct: Product,
+    wishQuantity: number,
   }[] = [];
   wishTotalPrice: number = 0;
   wishCartCounter!: number;
   wishCartProducts: Product[] = [];
 
-  constructor(private productService: ProductService, private productComp: ProductCardComponent, private router: Router, private wishServ: WishHttpService, public navComp: NavbarComponent) { }
+  constructor(private productService: ProductService, private productComp: ProductDetailsComponent, private router: Router, private wishServ: WishHttpService, public navComp: NavbarComponent) { }
 
   ngOnInit(): void {
     this.startingCartAmount();

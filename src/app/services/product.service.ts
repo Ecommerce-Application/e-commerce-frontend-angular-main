@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
@@ -51,16 +51,37 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.baseUrl+this.productUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
+    return this.http.get<Product[]>(environment.baseUrl + this.productUrl, { headers: environment.headers, withCredentials: environment.withCredentials });
   }
 
-  public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+this.productUrl+"/"+id);
+  public getSingleProduct(prodId: number): Observable<Product> {
+    return this.http.get<Product>(environment.baseUrl+'/prod/'+prodId);
   }
 
-  public purchase(products: {id:number, quantity:number}[]): Observable<any> {
+  public purchase(products: {prodId:number, prodQuantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
-    return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+    return this.http.patch<any>(environment.baseUrl + this.productUrl, payload, { headers: environment.headers, withCredentials: environment.withCredentials })
+  }
+  token:string = "null";
+  public finalizepurchase(total:number,products: {prodId:number, prodQuantity:number}[]): Observable<any> {
+    let fixed:{productId:number,qty:number}[]=[];
+
+    for(let p of products){
+      fixed.push({productId:p.prodId,qty:p.prodQuantity})
+    }
+
+
+    let time = Date.now()
+    var light = {userId:1,
+    total:total,
+    datePlaced:Date.now(),
+  orderQuantityBoughts:fixed}
+
+    const payload = JSON.stringify(light);
+    //let id=window.sessionStorage.getItem('rolodex-token');
+    //environment.headers['rolodex-token']='1'
+    return this.http.post<any>(environment.baseUrl+'/order', payload, {headers: environment.headers, withCredentials: environment.withCredentials,
+    })
   }
 
   public getQuantity(id: number): number {
@@ -71,5 +92,60 @@ export class ProductService {
     }
     return 0;
   }
+
+
+  public searchProduct(value: string, searchBy: string): Observable<Product[]> {
+    let setParam = new HttpParams();
+    let param;
+    if (searchBy === "name") {
+      param = setParam.append("nameQuery", value)
+    }
+    else if (searchBy === "description") {
+      param = setParam.append("descQuery", value)
+    }
+    else if (searchBy === "price") {
+      param = setParam.append("priceQuery", value)
+    }
+    return this.http.get<Product[]>(environment.baseUrl + this.productUrl + "/search",
+      { headers: environment.headers, withCredentials: environment.withCredentials, params: param });
+  }
+
+  public removeProduct(product: Product): void {
+    this.getCart().subscribe(
+      (cart) => {
+        cart.products.forEach(
+          (element, index) => {
+            if (element.product.prodId === product.prodId) {
+              cart.products.splice(index, 1);
+            }
+          }
+        );
+        cart.cartCount -= 1;
+        cart.totalPrice -= product.prodPrice;
+        this.setCart(cart);
+      }
+    );
+  }
+
+
+
+
+  // public removeWishProduct(product: Product): void {
+  //   this.getWishCart().subscribe(
+  //     (wishCart) => {
+  //       wishCart.wishProducts.forEach(
+  //         (element, index) => {
+  //           if (element.wishProduct.prodId === product.prodId) {
+  //             wishCart.wishProducts.splice(index, 1);
+  //           }
+  //         }
+  //       );
+  //       wishCart.wishCartCount -= 1;
+  //       wishCart.wishTotalPrice -= product.prodPrice;
+  //       this.setWishCart(wishCart);
+  //     }
+  //   );
+  // }
+
 
 }
