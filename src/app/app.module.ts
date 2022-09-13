@@ -46,7 +46,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ProductCardComponent],
+  providers: [ProductCardComponent, ProductDetailsComponent, NavbarComponent, WishCartComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
