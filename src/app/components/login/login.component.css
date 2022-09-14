@@ -8,3 +8,7 @@ img
 .page-height {
     min-height: 100vh;
 }
+
+h6 {
+   padding-top: 10px;
+}

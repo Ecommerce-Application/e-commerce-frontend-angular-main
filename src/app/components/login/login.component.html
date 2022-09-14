@@ -1,8 +1,7 @@
-<div class="row page-height justify-content-center align-content-center">
+<div class="row page-height justify-content-center align-content-center mb-0">
   <div class="col w-100">
+    <form class="w-100 pt-5" id="login-form" [formGroup]="loginForm">
       <img src="../../../assets/images/Shrooster.png" width="30%" alt="ShRooster" class="d-block mx-auto">
-
-    <form class="w-100" id="login-form" [formGroup]="loginForm">
         <div class="form-group w-75 py-2 mx-auto">
           
           <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Email" required="true">
@@ -35,7 +34,7 @@
     <div class="w-75 d-flex flex-column my-1 mx-auto">
       <button class="btn btn-primary my-1 button-style" id="button-style" (click)="onSubmit()">Login</button> 
   
-        <h6 class="mx-auto my-1">Not a Rooster?</h6>
+        <h6 class="mx-auto my-3">Not a Rooster?</h6>
         <button class="btn btn-primary d-inline my-1" id="button-style" [routerLink]="['/register']">Join the Coop</button>
     </div>
   </div>
