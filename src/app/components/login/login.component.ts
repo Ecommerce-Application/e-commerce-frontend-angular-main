@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
         if (userId != null){
           sessionStorage.setItem('userId', String(userId));
         }
+        AppComponent.isLoggedIn=true;
       },
       error: (err) => {console.log(err); this.errorMessage="Invalid Email and Password"},
       complete: () => this.router.navigate(['home'])

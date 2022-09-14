@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     this.authService.register(this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('email')?.value, this.registerForm.get('password')?.value).subscribe(
       () => console.log("New user registered"),
-      (err) => console.log(err),
+      (err: any) => console.log(err),
       () => this.router.navigate(['login'])
     );
   }
