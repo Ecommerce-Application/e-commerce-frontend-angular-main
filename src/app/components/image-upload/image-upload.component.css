@@ -1,0 +1,21 @@
+.image {
+    max-width: 150px;
+    border-radius: 50%;
+    margin: 10px;
+    box-shadow: 1px 1px 5px black;
+}
+
+.none {
+    display: none;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+}
+
+.size {
+    font-size: 13px;
+    color: red;
+    text-align: center;
+}

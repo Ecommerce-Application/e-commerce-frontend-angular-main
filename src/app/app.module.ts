@@ -17,6 +17,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { WishCartComponent } from './components/wish-cart/wish-cart.component';
 import { CaroselComponent } from './components/carosel/carosel.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { PreviousOrdersComponent } from './components/previous-orders/previous-orders.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
@@ -35,9 +37,9 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     SearchPageComponent,
     WishCartComponent,
     CaroselComponent,
-    PreviousOrdersComponent,
-    CaroselComponent
-
+    ImageUploadComponent,
+    ProfileComponent,
+    PreviousOrdersComponent
   ],
   imports: [
     BrowserModule,
