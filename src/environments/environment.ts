@@ -6,16 +6,13 @@
 export const environment = {
   production: false,
   withCredentials: true,
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "http://localhost:500checkout0/api",
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:4200',
     'rolodex-token': `${sessionStorage.getItem('token')}`
   },
 };
-
-
-
 
 /*
  * For easier debugging in development mode, you can import the following file

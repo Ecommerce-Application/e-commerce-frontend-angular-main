@@ -14,12 +14,12 @@
         <tr *ngFor="let PreviousOrder of PreviousOrderList">
             <td>{{PreviousOrder.total | currency: 'USD'}}</td>
             <td>{{PreviousOrder.datePlaced?(PreviousOrder.datePlaced | date: 'MMMM,d,y,h:mm a'):"-"}}</td>
-            <td><button (click)="checkOrder(PreviousOrder.transactionId)">Check Order</button></td>
+            <td><button id="button-style" (click)="checkOrder(PreviousOrder.transactionId)">Check Order</button></td>
 
         </tr>
     </tbody>
 </table>
-<table *ngIf="CheckingOrder"><button (click)="GoBack()">Go Back</button></table>
+<table *ngIf="CheckingOrder"><button id="button-style" (click)="GoBack()">Go Back</button></table>
 <table *ngIf="CheckingOrder">
     <thead>
        

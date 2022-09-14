@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-cart',
@@ -12,24 +13,33 @@ export class CartComponent implements OnInit {
 
   products: {
     product: Product,
-    prodQuantity: number
+    quantity: number
   }[] = [];
   totalPrice!: number;
-  cartProducts: Product[] = [];
+  cartProducts: Product[]=[];
 
-  constructor(private productService: ProductService, private router: Router) { }
+  // quantity: number= 1;
+
+  constructor(private productService: ProductService, private router: Router, private navBar: NavbarComponent) { }
 
   ngOnInit(): void {
+
+
     this.productService.getCart().subscribe(
       (cart) => {
         this.products = cart.products;
+
         this.products.forEach(
-          (element) => this.cartProducts.push(element.product)
+          (element) => {
+            this.cartProducts.push(element.product);
+          }
         );
-        this.totalPrice = cart.totalPrice;
+        this.totalPrice = Math.round(cart.totalPrice);
       }
     );
+
   }
+
 
   // update quantity of product in cart based on user input
 
@@ -40,7 +50,8 @@ export class CartComponent implements OnInit {
       this.totalPrice = 0;
       this.products.forEach(
         (element) => {
-          this.totalPrice += element.product.prodPrice * element.prodQuantity;
+          this.totalPrice += Math.round(element.product.prodPrice * element.quantity);
+
         }
       );
       let cart = {
@@ -50,19 +61,21 @@ export class CartComponent implements OnInit {
       };
       this.productService.setCart(cart);
     }
-}
+
+  }
+
   updateQuantity(product: Product, quantity: number): void {
     this.products.forEach(
       (element) => {
         if (element.product == product) {
-          element.prodQuantity = quantity;
+          element.quantity = quantity;
         }
       }
     );
     this.totalPrice = 0;
     this.products.forEach(
       (element) => {
-        this.totalPrice += element.product.prodPrice * element.prodQuantity;
+        this.totalPrice += Math.round(element.product.prodPrice * element.quantity);
       }
     );
     let cart = {
@@ -71,6 +84,7 @@ export class CartComponent implements OnInit {
       totalPrice: this.totalPrice
     };
     this.productService.setCart(cart);
+
   }
 
   emptyCart(): void {
@@ -80,10 +94,11 @@ export class CartComponent implements OnInit {
       totalPrice: 0.00
     };
     this.productService.setCart(cart);
+
     this.router.navigate(['/home']);
   }
 
-  removeProduct(product: Product): void {
+  removeProduct(product: Product, quantity: number): void {
     this.products.forEach(
       (element, index) => {
         if (element.product.prodId === product.prodId) {
@@ -92,13 +107,15 @@ export class CartComponent implements OnInit {
       }
     );
     this.cartProducts.splice(this.cartProducts.indexOf(product), 1);
-    this.totalPrice -= product.prodPrice;
+    this.totalPrice -= Math.round(product.prodPrice * quantity);
     let cart = {
       cartCount: this.products.length,
       products: this.products,
       totalPrice: this.totalPrice
     };
     this.productService.setCart(cart);
+
   }
+
 
 }
