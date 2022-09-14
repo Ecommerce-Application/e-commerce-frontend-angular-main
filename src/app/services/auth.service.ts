@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    console.log(sessionStorage.getItem('token'))
+    console.log(window.sessionStorage.getItem('token'))
     console.log(`${this.authUrl}/logout`);
     console.log(environment.headers)
     return this.http.post<any>(`${this.authUrl}/logout`, {}, { headers: environment.headers, observe: 'response' });

@@ -51,8 +51,8 @@ export class NavbarComponent implements OnInit{
 
   logout() {
     this.authService.logout().subscribe( () => {console.log('ok'); });
-    sessionStorage.setItem("isLoggedIn", String(false));
-    sessionStorage.clear();
+    window.sessionStorage.setItem("isLoggedIn", String(false));
+    window.sessionStorage.clear();
     this.router.navigate(['login']);
   }
 

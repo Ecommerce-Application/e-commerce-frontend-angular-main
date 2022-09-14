@@ -20,7 +20,7 @@ export class PreviousOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     window.sessionStorage.setItem('rolodex-token','1')
-    let data = sessionStorage.getItem('rolodex-token')
+    let data = window.sessionStorage.getItem('rolodex-token')
     this.getOrders(1)
   }
 

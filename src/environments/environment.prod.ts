@@ -10,7 +10,7 @@ export const environment = {
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://e-commerce-shrooster.s3-website-us-east-1.amazonaws.com/',
-    'rolodex-token': `${sessionStorage.getItem('token')}`
+    'rolodex-token': `${window.sessionStorage.getItem('token')}`
   },
 };
 

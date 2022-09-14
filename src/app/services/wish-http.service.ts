@@ -23,8 +23,8 @@ export class WishHttpService {
   prodIdList = new Set<number>();
 
 
-  sessiontoken = sessionStorage.getItem('token');
-  uId = sessionStorage.getItem('userId');
+  sessiontoken = window.sessionStorage.getItem('token');
+  uId = window.sessionStorage.getItem('userId');
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'application/json',

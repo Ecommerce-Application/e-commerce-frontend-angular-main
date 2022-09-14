@@ -10,7 +10,7 @@ export const environment = {
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:4200',
-    'rolodex-token': `${sessionStorage.getItem('token')}`
+    'rolodex-token': `${window.sessionStorage.getItem('token')}`
   },
 };
 

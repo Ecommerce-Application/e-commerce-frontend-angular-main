@@ -12,6 +12,6 @@ export class AppComponent {
 
 
   get staticIsLoggedIn() {
-    return sessionStorage.getItem('isLoggedIn')?.valueOf;
+    return window.sessionStorage.getItem('isLoggedIn')?.valueOf;
   }
 }

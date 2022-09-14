@@ -34,16 +34,16 @@ export class LoginComponent implements OnInit {
       next: (response: HttpResponse<any>) => {
         console.log(response);
         this.authService.loggedIn=true;
-        sessionStorage.setItem("isLoggedIn", String(true));
+        window.sessionStorage.setItem("isLoggedIn", String(true));
         let token = response.body.tokenId;
         console.log(token);
         if (token != null){
-          sessionStorage.setItem('token', String(token));
+          window.sessionStorage.setItem('token', String(token));
         }
         let userId = response.body?.userId;
         console.log(userId);
         if (userId != null){
-          sessionStorage.setItem('userId', String(userId));
+          window.sessionStorage.setItem('userId', String(userId));
         }
       },
       error: (err) => {console.log(err); this.errorMessage="Invalid Email and Password"},
