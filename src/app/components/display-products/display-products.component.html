@@ -1,11 +1,26 @@
-<app-navbar></app-navbar>
+
 <div class="container">
+    <div class="alert alert-danger text-center" role="alert" *ngIf="errorMessage">
+        {{errorMessage}}
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <input type="text" class="form-control" placeholder="search product" name="search" [(ngModel)]="param">
+        </div>
+        <div class="col-3">
+            <select class="form-select" [(ngModel)]="type">
+                <option value="name">Name</option>
+                <option value="description">Description</option>
+                <option value="price">Price</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <button class="btn btn-primary" (click)="getFilteredProducts()" id="button-style">Search</button>
+        </div>
+    </div>
     <div class="row align-items-start">
-       <div class="col" *ngFor="let product of allProducts">
-            <app-product-card
-                class="cardListItem"
-                [productInfo]="product"
-            ></app-product-card>
+        <div class="col" *ngFor="let product of allProducts">
+            <app-product-card class="cardListItem" [productInfo]="product"></app-product-card>
         </div>
     </div>
 </div>

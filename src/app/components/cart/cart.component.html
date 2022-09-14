@@ -1,5 +1,17 @@
-<app-navbar></app-navbar>
-<table class="table table-striped" id="cart-table">
+
+<div>
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-danger mx-1 mt-4" id="button-style" [routerLink]="['/home']">Back</button>
+    </div>
+    <div class="col-md-4 offset-md-6">
+      <button class="btn btn-warning mx-1 mt-4" id="button-style" (click)="emptyCart()">Empty Cart</button>
+      <button class="btn btn-primary mx-1 mt-4" id="button-style" [routerLink]="['/checkout']">Proceed to
+        Checkout(${{totalPrice}})</button>
+    </div>
+  </div>
+
+  <table class="table table-striped" id="cart-table">
     <thead>
       <tr>
         <!-- <th scope="col">ID</th> -->
@@ -10,22 +22,35 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody id="cart-table-body">
-        <tr *ngFor="let product of products;">
-            <!-- <td>{{product.product.id}}</td> -->
-            <td>{{product.product.prodName}}</td>
-            <!--Allow user to change the quantity of a product in cart-->
-            <td>
-               <input type="number" [(ngModel)]="product.prodQuantity" (change)="productNumber()" min="1" max="3" id="productNumberID">
+    <tbody id="cart-table-body ">
+      <tr *ngFor="let product of products;" class="item">
+        <!-- <td>{{product.product.id}}</td> -->
+        <td>{{product.product.prodName}}</td>
+        <!--Allow user to change the quantity of a product in cart-->
+        <td>
+          <!-- make max equals or less than prod.quantity -->
+          <input *ngIf="product.product.prodQuantity<4" type="number" min="1" max="4" max="{{product.product.prodQuantity}}" [(ngModel)]="product.quantity" (change)="updateQuantity(product.product , product.quantity)">
+          <!-- check product.product.prodQuantity and set max based on that -->
 
-            <!-- <td>{{product.quantity}}</td> -->
-            <td>{{product.product.prodDesc}}</td>
-            <td>{{product.product.prodPrice * product.prodQuantity}}</td>
-            <!-- Button to remove product from cart -->
-            <td><button class="btn btn-danger" (click)="removeProduct(product.product)">Remove</button></td>
-        </tr>
+          <input *ngIf="product.product.prodQuantity>=4" type="number" [(ngModel)]="product.quantity" (change)="productNumber()" min="1" max="4"
+            id="productNumberID">
+
+          <!-- <td>{{product.quantity}}</td> -->
+        <td>{{product.product.prodDesc}}</td>
+        <td>{{product.product.prodPrice * product.quantity}}</td>
+        <!-- Button to remove product from cart -->
+        <td><button class="btn btn-danger" id="button-style" (click)="removeProduct(product.product, product.quantity)">Remove</button>
+        </td>
+      </tr>
     </tbody>
-</table>
-<button class="btn btn-danger" [routerLink]="['/home']">Back</button>
-<button class="btn btn-warning" (click)="emptyCart()">Empty Cart</button>
-<button class="btn btn-primary" [routerLink]="['/checkout']">Proceed to Checkout (${{totalPrice}})</button>
+  </table>
+
+  <div class="row">
+    <div class="col-md-4 offset-md-8">
+      <button class="btn btn-warning mx-1 mt-4" id="button-style" (click)="emptyCart()">Empty Cart</button>
+      <button class="btn btn-primary mx-1 mt-4" id="button-style" [routerLink]="['/checkout']">Proceed to
+        Checkout(${{totalPrice}})</button>
+    </div>
+  </div>
+
+</div>

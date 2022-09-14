@@ -1,0 +1,129 @@
+.auto {
+    display: flex;
+    flex-direction: column;
+    margin-left: 800px;
+}
+
+.border {
+    border: 5px double black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.center {
+    margin: auto;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.height {
+    margin: auto 0px;
+}
+
+h6 {
+    color: red;
+    justify-content: center;
+}
+
+.icon {
+    height: 40px;
+}
+
+.centerInput {
+    text-align: center;
+}
+
+label {
+    padding: 1%;
+}
+
+.left {
+    margin-left: 225px;
+}
+
+.margin {
+    margin: 10px auto;
+    width: 80%;
+}
+
+p {
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+p.red {
+    color: red;
+}
+
+select {
+    display: block;
+    margin: 10px auto;
+}
+
+.size {
+    font-size: 13px;
+    color: red;
+}
+
+.space {
+    display: flex;
+}
+
+.space-around {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto 10px 250px;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tiny {
+    font-size: 10px;
+}
+
+.top {
+    margin-top: -200px;
+}
+
+.top2 {
+    margin-top: 75px;
+}
+
+.upload {
+    width: 100%;
+}
+
+.width30 {
+    width: 30%;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.width90 {
+    width: 90%;
+    margin: auto;
+}
