@@ -13,12 +13,14 @@ export class CheckoutComponent implements OnInit {
 
   products: {
     product: Product,
-    prodQuantity: number
+    quantity: number
   }[] = [];
   totalPrice!: number;
   cartProducts: Product[] = [];
   finalProducts: {prodId: number, prodQuantity: number}[] = [];
   loadUserInfo: boolean = false;
+
+  transactionId:number=0;
 
   checkoutForm = new UntypedFormGroup({
     fname: new UntypedFormControl('', Validators.required),
@@ -51,14 +53,22 @@ export class CheckoutComponent implements OnInit {
     this.products.forEach(
       (element) => {
         const prodId = element.product.prodId;
-        const prodQuantity = element.prodQuantity
+        const prodQuantity = element.quantity
         this.finalProducts.push({prodId, prodQuantity})
       }
     );
 
     if(this.finalProducts.length > 0) {
+
+
+
       this.productService.purchase(this.finalProducts).subscribe(
-        (resp) => console.log(resp),
+        (resp) => {console.log(resp)
+        this.productService.finalizepurchase(this.totalPrice,this.finalProducts).subscribe((res)=>{
+        this.transactionId=Number(res.transactionId)
+        })
+        }
+        ,
         (err) => console.log(err),
         () => {
           let cart = {

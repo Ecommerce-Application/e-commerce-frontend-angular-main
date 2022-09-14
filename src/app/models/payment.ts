@@ -1,9 +1,11 @@
 export class Payment {
-    name: string
-    detail: string
+    ccNumber: string;
+    exp: string;
+    svg: string;
 
-    constructor (name: string, detail: string) {
-        this.name = name;
-        this.detail = detail;
+    constructor (ccNumber: string, exp: string, svg: string) {
+        this.ccNumber = ccNumber;
+        this.exp = exp;
+        this.svg = svg;
     }
 }

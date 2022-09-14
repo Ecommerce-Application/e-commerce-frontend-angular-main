@@ -11,6 +11,6 @@ export class CaroselComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  yO = 'assets/images/rooster.png';
+  yO = 'assets/images/rooster1.png';
 
 }

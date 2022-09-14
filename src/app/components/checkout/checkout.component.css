@@ -1,3 +1,7 @@
+.abs {
+    position: fixed;
+}
+
 .table 
 {
     margin-left: 3%;
@@ -22,6 +26,7 @@ body{
 
 .card{
     border:none;
+    padding: 2%;
 }
 
 .form-control {
@@ -81,21 +86,16 @@ input::-webkit-inner-spin-button {
 
 .card-blue{
 
-    background-color: #F26925;
+    background-color: #ce2d35;
 }
 
 .hightlight{
 
-    background-color: #F26925;
+    background-color: #ce2d35;
     padding: 10px;
     border-radius: 10px;
     margin-top: 15px;
     font-size: 14px;
-}
-
-.yellow{
-
-    color: #fdcc49; 
 }
 
 .decoration{

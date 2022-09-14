@@ -7,13 +7,15 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css']
 })
-export class ProductCardComponent implements OnInit{
+export class ProductCardComponent implements OnInit {
+
 
   @Input() productInfo!: Product;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+
   }
 
 }
