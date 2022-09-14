@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       next: (response: HttpResponse<any>) => {
         console.log(response);
         this.authService.loggedIn=true;
+        sessionStorage.setItem("isLoggedIn", String(true));
         let token = response.body.tokenId;
         console.log(token);
         if (token != null){
@@ -43,7 +44,6 @@ export class LoginComponent implements OnInit {
         if (userId != null){
           sessionStorage.setItem('userId', String(userId));
         }
-        AppComponent.isLoggedIn=true;
       },
       error: (err) => {console.log(err); this.errorMessage="Invalid Email and Password"},
       complete: () => this.router.navigate(['home'])

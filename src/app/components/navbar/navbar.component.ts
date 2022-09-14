@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { WishHttpService } from 'src/app/services/wish-http.service';
@@ -50,6 +51,7 @@ export class NavbarComponent implements OnInit{
 
   logout() {
     this.authService.logout().subscribe( () => {console.log('ok'); });
+    sessionStorage.setItem("isLoggedIn", String(false));
     sessionStorage.clear();
     this.router.navigate(['login']);
   }

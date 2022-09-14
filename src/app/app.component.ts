@@ -10,7 +10,8 @@ export class AppComponent {
 
   public static isLoggedIn: boolean = false;
 
+
   get staticIsLoggedIn() {
-    return AppComponent.isLoggedIn;
+    return sessionStorage.getItem('isLoggedIn')?.valueOf;
   }
 }
