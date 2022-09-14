@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
       next: (response: HttpResponse<any>) => {
         console.log(response);
         this.authService.loggedIn=true;
+        sessionStorage.setItem("isLoggedIn", String(true));
         let token = response.body.tokenId;
         console.log(token);
         if (token != null){
