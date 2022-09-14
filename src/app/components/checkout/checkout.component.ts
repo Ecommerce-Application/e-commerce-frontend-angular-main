@@ -13,7 +13,7 @@ export class CheckoutComponent implements OnInit {
 
   products: {
     product: Product,
-    prodQuantity: number
+    quantity: number
   }[] = [];
   totalPrice!: number;
   cartProducts: Product[] = [];
@@ -53,7 +53,7 @@ export class CheckoutComponent implements OnInit {
     this.products.forEach(
       (element) => {
         const prodId = element.product.prodId;
-        const prodQuantity = element.prodQuantity
+        const prodQuantity = element.quantity
         this.finalProducts.push({prodId, prodQuantity})
       }
     );
