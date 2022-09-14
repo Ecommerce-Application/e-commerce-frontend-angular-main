@@ -9,7 +9,7 @@ export const environment = {
   baseUrl: "http://ecommerceshroosterbackendapi-env.eba-kqdcw2sm.us-east-1.elasticbeanstalk.com/api",
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Origin': 'http://e-commerce-shrooster.s3-website-us-east-1.amazonaws.com/',
     'rolodex-token': `${sessionStorage.getItem('token')}`
   },
 };
