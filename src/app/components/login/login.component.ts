@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     password: new UntypedFormControl('')
   })
 
+  hide = true;
 
   constructor(private authService: AuthService, private router: Router) { }
 
