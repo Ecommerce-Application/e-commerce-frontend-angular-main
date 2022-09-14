@@ -1,0 +1,42 @@
+h5 {
+    text-align: center;
+}
+body{
+    background-color:rgb(238, 251, 255);
+}
+#button-style {
+    background-color: #edc615;
+    color: black;
+    border-radius:2px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bolder;
+    border: none;
+    box-shadow: 1px 1px 1px black;
+    text-align: center;
+}
+
+
+table {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+
+    border: 1px solid #f58822;
+    border-collapse: collapse;
+}
+div{
+    margin:10 auto;
+}
+
+tr{
+    border-bottom: 1px solid #f58822;
+    text-align: center;
+    background-color: lightgoldenrodyellow;
+    padding: 0px 5px;
+
+}
+tr {
+    /* text-align: right; */
+    background-color: lightgoldenrodyellow;
+    padding: 0px 5px;
+}

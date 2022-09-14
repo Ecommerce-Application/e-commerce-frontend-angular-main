@@ -8,7 +8,7 @@ interface Cart {
   cartCount: number;
   products: {
     product: Product,
-    prodQuantity: number
+    quantity: number
   }[];
   totalPrice: number;
 }
@@ -48,22 +48,6 @@ export class ProductService {
   }
 
 
-  private _wishcart = new BehaviorSubject<WishCart>({
-    wishCartCount: 0,
-    wishProducts: [],
-    wishTotalPrice: 0.00
-  });
-  private _wishcart$ = this._wishcart.asObservable();
-
-  getWishCart(): Observable<WishCart> {
-    return this._wishcart$;
-  }
-
-  setWishCart(latestValue: WishCart) {
-    return this._wishcart.next(latestValue);
-  }
-
-
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
@@ -77,6 +61,36 @@ export class ProductService {
   public purchase(products: {prodId:number, prodQuantity:number}[]): Observable<any> {
     const payload = JSON.stringify(products);
     return this.http.patch<any>(environment.baseUrl + this.productUrl, payload, { headers: environment.headers, withCredentials: environment.withCredentials })
+  }
+  token:string = "null";
+  public finalizepurchase(total:number,products: {prodId:number, prodQuantity:number}[]): Observable<any> {
+    let fixed:{productId:number,qty:number}[]=[];
+
+    for(let p of products){
+      fixed.push({productId:p.prodId,qty:p.prodQuantity})
+    }
+
+
+    let time = Date.now()
+    var light = {userId:1,
+    total:total,
+    datePlaced:Date.now(),
+  orderQuantityBoughts:fixed}
+
+    const payload = JSON.stringify(light);
+    //let id=window.sessionStorage.getItem('rolodex-token');
+    //environment.headers['rolodex-token']='1'
+    return this.http.post<any>(environment.baseUrl+'/order', payload, {headers: environment.headers, withCredentials: environment.withCredentials,
+    })
+  }
+
+  public getQuantity(id: number): number {
+    const cart = this._cart.getValue();
+    const product = cart.products.find(p => p.product.prodId === id);
+    if (product) {
+      return product.quantity;
+    }
+    return 0;
   }
 
 
@@ -116,22 +130,22 @@ export class ProductService {
 
 
 
-  public removeWishProduct(product: Product): void {
-    this.getWishCart().subscribe(
-      (wishCart) => {
-        wishCart.wishProducts.forEach(
-          (element, index) => {
-            if (element.wishProduct.prodId === product.prodId) {
-              wishCart.wishProducts.splice(index, 1);
-            }
-          }
-        );
-        wishCart.wishCartCount -= 1;
-        wishCart.wishTotalPrice -= product.prodPrice;
-        this.setWishCart(wishCart);
-      }
-    );
-  }
+  // public removeWishProduct(product: Product): void {
+  //   this.getWishCart().subscribe(
+  //     (wishCart) => {
+  //       wishCart.wishProducts.forEach(
+  //         (element, index) => {
+  //           if (element.wishProduct.prodId === product.prodId) {
+  //             wishCart.wishProducts.splice(index, 1);
+  //           }
+  //         }
+  //       );
+  //       wishCart.wishCartCount -= 1;
+  //       wishCart.wishTotalPrice -= product.prodPrice;
+  //       this.setWishCart(wishCart);
+  //     }
+  //   );
+  // }
 
 
 }

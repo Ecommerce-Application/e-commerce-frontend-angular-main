@@ -4,7 +4,7 @@
     <button class="btn btn-danger mx-1 mt-4" id="button-style" [routerLink]="['/home']">Back</button>
   </div>
   <div class="col-md-4 offset-md-6">
-    <button class="btn btn-warning mx-1 mt-4" id="button-style" (click)="emptyWishCart()">Empty Cart</button>
+    <button class="btn btn-warning mx-1 mt-4" id="button-style" (click)="emptyWishCart()">Empty WishList</button>
     <button class="btn btn-primary mx-1 mt-4" id="button-style" [routerLink]="['/checkout']">Proceed to Checkout (${{wishTotalPrice}})</button>
   </div>
 </div>
@@ -24,16 +24,16 @@
             <!-- <td>{{product.product.id}}</td> -->
             <td>{{product.prodName}}</td>
             <!--Allow user to change the quantity of a product in cart-->
-            <td>
+
                <!-- <input type="number" [(ngModel)]="product.wishQuantity" (change)="WishProductNumber()" min="1" max="3" id="wishProductNumberID"> -->
 
             <!-- <td>{{product.quantity}}</td> -->
             <td>{{product.prodDesc}}</td>
-            <td>{{product.prodPrice * product.prodQuantity}}</td>
+            <td>{{product.prodPrice}}</td>
             <!-- Button to remove product from cart or add it to cart -->
             <td>
-                <button type="button" class="btn btn-danger" (click)="removeWishProduct(product)">Remove</button>
-                <!-- <button type="button" class="btn btn-success" (click)="addFromWish(this.wishCartProducts.indexOf(product))">Add to Cart</button> -->
+                <button type="button" class="btn btn-danger mx-1" id="button-style" (click)="removeWishProduct(product)">Remove</button>
+                <button type="button" class="btn btn-success mx-1" id="button-style" (click)="addFromWish(this.wishCartProducts.indexOf(product))">Add to Cart</button>
             <!-- <td><button class="btn btn-danger" (click)="removeWishProduct(product.wishProduct)">Remove</button> --> </td>
         </tr>
     </tbody>
