@@ -86,6 +86,7 @@ export class ProductService {
     const payload = JSON.stringify(light);
     //let id=window.sessionStorage.getItem('rolodex-token');
     //environment.headers['rolodex-token']='1'
+    environment.headers['rolodex-token']=window.sessionStorage.getItem("token")!
     return this.http.post<any>(environment.baseUrl+'/order', payload, { headers: environment.headers, withCredentials: environment.withCredentials })
   }
 
