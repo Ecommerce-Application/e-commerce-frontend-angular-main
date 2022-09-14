@@ -6,7 +6,7 @@ export const environment = {
   production: true,
   title: 'Production Environment Heading',
   withCredentials: true,
-  baseUrl: "http://ecommerceshroosterbackendapi-env.eba-kqdcw2sm.us-east-1.elasticbeanstalk.com/",
+  baseUrl: "http://ecommerceshroosterbackendapi-env.eba-kqdcw2sm.us-east-1.elasticbeanstalk.com/api",
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:4200',

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
+import { WishHttpService } from 'src/app/services/wish-http.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ export class NavbarComponent implements OnInit{
   cartCount!: number;
   subscription!: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
+  constructor(private authService: AuthService, private router: Router, private productService: ProductService, private wishServ: WishHttpService) { }
 
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
@@ -31,7 +32,8 @@ export class NavbarComponent implements OnInit{
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout().subscribe( () => {console.log('ok'); });
+    sessionStorage.clear();
     this.router.navigate(['login']);
   }
 

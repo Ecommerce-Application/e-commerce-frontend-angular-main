@@ -20,6 +20,8 @@ export class CheckoutComponent implements OnInit {
   finalProducts: {prodId: number, prodQuantity: number}[] = [];
   loadUserInfo: boolean = false;
 
+  transactionId:number=0;
+
   checkoutForm = new UntypedFormGroup({
     fname: new UntypedFormControl('', Validators.required),
     lname: new UntypedFormControl('', Validators.required),
@@ -57,8 +59,16 @@ export class CheckoutComponent implements OnInit {
     );
 
     if(this.finalProducts.length > 0) {
+
+
+
       this.productService.purchase(this.finalProducts).subscribe(
-        (resp) => console.log(resp),
+        (resp) => {console.log(resp)
+        this.productService.finalizepurchase(this.totalPrice,this.finalProducts).subscribe((res)=>{
+        this.transactionId=Number(res.transactionId)
+        })
+        }
+        ,
         (err) => console.log(err),
         () => {
           let cart = {
